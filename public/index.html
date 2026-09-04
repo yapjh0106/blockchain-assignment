@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Escrow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- ==================== LANDING PAGE ==================== -->
+<section id="landingPage" class="landing-page">
+    <div class="landing-content">
+        <div class="brand-cube" style="font-size: 4rem; margin-bottom: 20px; color: #ffffff; text-shadow: 0 4px 15px rgba(0,0,0,0.2);">◇</div>
+        <h1 style="font-size: 3.5rem; margin-bottom: 10px; color: #ffffff; text-shadow: 0 4px 15px rgba(0,0,0,0.2);">Decentralized Escrow</h1>
+        <p style="font-size: 1.3rem; color: #e0f4fa; margin-bottom: 40px; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">and Milestone-Based Logistics Platform</p>
+
+        <button id="enterAppBtn" class="primary-button" type="button" style="font-size: 1.2rem; padding: 18px 45px; border-radius: 30px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); transition: all 0.3s ease; background: #ffffff; color: #1167df;">
+            Enter App
+        </button>
+    </div>
+</section>
+
+<!-- ==================== HOME PAGE ==================== -->
+<section id="homePage" class="home-page" style="display:none;">
+
+    <header class="app-header">
+        <div class="app-brand">
+            <div class="brand-cube">◇</div>
+            <div>
+                <h1>Decentralized Escrow</h1>
+                <p>and Milestone-Based Logistics Platform</p>
+            </div>
+        </div>
+
+        <nav class="header-nav home-header-nav">
+            <button class="main-nav-button" type="button" data-home-nav="dashboard">⌂ Dashboard</button>
+            <button class="main-nav-button" type="button" data-home-nav="agreements">▤ Agreements</button>
+            <button class="main-nav-button" type="button" data-home-nav="history">↻ History</button>
+            <button class="main-nav-button" type="button" data-home-nav="reputation">♢ Reputation</button>
+        </nav>
+
+        <button id="connectWallet" class="outline-header-button" type="button">
+            ▣ Connect Wallet
+        </button>
+    </header>
+
+    <main class="home-main">
+        <!-- LEFT INTRODUCTION -->
+        <section class="home-introduction">
+            <div class="intro-inner">
+                <h2>
+                    Welcome to the Future of<br>
+                    Secure and Transparent Logistics
+                </h2>
+
+                <p class="intro-description">
+                    Decentralized Escrow and Milestone-Based Logistics Platform provides secure
+                    escrow payments, transparent milestone tracking and blockchain-based Carrier
+                    reputation.
+                </p>
+
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>
+                        <h3>Decentralized Escrow</h3>
+                        <p>
+                            Funds are securely locked in the smart contract and released according
+                            to verified logistics milestones.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">▣</div>
+                    <div>
+                        <h3>Milestone-Based Delivery</h3>
+                        <p>
+                            Track Pickup and Final Delivery milestones through transparent
+                            blockchain transactions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">★</div>
+                    <div>
+                        <h3>Reputation & Trust</h3>
+                        <p>
+                            Carriers earn CRP reputation points when milestones are successfully
+                            verified by the Shipper.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-banner teal-banner">
+                    <div class="banner-icon">★</div>
+                    <span>Connect your wallet to get started as a Shipper or Carrier.</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- RIGHT AUTH -->
+        <section class="home-auth-column">
+
+            <div class="auth-card">
+                <h2>1. Connect Your Wallet</h2>
+                <p>Connect your MetaMask wallet to continue.</p>
+
+                <button id="homeConnectWallet" class="metamask-button" type="button">
+                    🦊 Connect MetaMask
+                </button>
+
+                <div id="connectedWalletBox" class="connected-wallet-box" style="display:none;">
+                    <span>Connected Wallet</span>
+                    <strong id="homeWalletAddress">-</strong>
+                    <small>Network ID: <span id="homeNetworkId">-</span></small>
+                </div>
+
+                <div class="security-box">
+                    🔒
+                    <span>
+                        Your private key remains inside MetaMask.
+                        This application never stores your private key.
+                    </span>
+                </div>
+            </div>
+
+            <div id="homeRegistrationCard" class="auth-card" style="display:none;">
+                <h2>2. Register Your Account</h2>
+                <p id="homeRegistrationStatus">Select your role and complete registration.</p>
+
+                <label class="field-label">Username</label>
+                <input type="text" id="homeUsernameInput" class="app-input" placeholder="Enter your name" style="margin-bottom: 20px;">
+
+                <label class="field-label">Role</label>
+
+                <div class="role-selector">
+                    <label class="role-option selected">
+                        <input type="radio" name="homeRole" value="1" checked>
+                        <span class="fake-radio"></span>
+                        <div>
+                            <strong>Shipper</strong>
+                            <small>Create and fund agreements</small>
+                        </div>
+                    </label>
+
+                    <label class="role-option">
+                        <input type="radio" name="homeRole" value="2">
+                        <span class="fake-radio"></span>
+                        <div>
+                            <strong>Carrier</strong>
+                            <small>Complete logistics milestones</small>
+                        </div>
+                    </label>
+                </div>
+
+                <label class="field-label">Wallet Address</label>
+
+                <div class="readonly-wallet">
+                    <span id="registrationWalletAddress">-</span>
+                </div>
+
+                <button id="homeRegisterButton" class="register-button" type="button">
+                    Register
+                </button>
+
+                <div class="small-info-box">
+                    After registration, you will automatically enter your role dashboard.
+                </div>
+            </div>
+
+        </section>
+    </main>
+</section>
+
+<!-- ==================== MAIN APPLICATION ==================== -->
+<div id="mainApplication" style="display:none;">
+    <header class="app-header main-app-header">
+        <div class="app-brand">
+            <div class="brand-cube">◇</div>
+            <div>
+                <h1>Decentralized Escrow</h1>
+                <p>and Milestone-Based Logistics Platform</p>
+            </div>
+        </div>
+
+        <nav class="header-nav">
+            <button class="main-nav-button active" data-page="dashboard" type="button">
+                ⌂ Dashboard
+            </button>
+            <button class="main-nav-button" data-page="agreements" type="button">
+                ▤ Agreements
+            </button>
+            <button class="main-nav-button" data-page="history" type="button">
+                ↻ History
+            </button>
+            <button class="main-nav-button" data-page="reputation" type="button">
+                ♢ Reputation
+            </button>
+        </nav>
+
+        <button id="returnHomeButton" class="wallet-card-button" type="button">
+            <div class="wallet-card-icon">▣</div>
+            <div>
+                <strong id="currentRole">-</strong>
+                <span id="walletAddress">-</span>
+            </div>
+            <span class="connected-dot"></span>
+        </button>
+    </header>
+
+    <main class="application-main">
+        <div id="globalStatus" class="global-status" style="display:none;"></div>
+        <!-- ==================== DASHBOARD ==================== -->
+        <section id="page-dashboard" class="app-page active-page">
+
+            <!-- SHIPPER DASHBOARD -->
+            <div id="shipperDashboardView" style="display:none;">
+
+                <div class="dashboard-heading">
+                    <div>
+                        <h1>Shipper Dashboard</h1>
+                        <p>Overview of your agreements and escrow activity.</p>
+                    </div>
+
+                    <button id="dashboardCreateAgreement" class="primary-button" type="button">
+                        + Create Agreement
+                    </button>
+                </div>
+
+                <div class="dashboard-layout">
+
+                    <div>
+                        <div class="three-stat-grid">
+
+                            <div class="stat-card">
+                                <div class="stat-icon blue">▤</div>
+                                <div>
+                                    <span>Active Agreements</span>
+                                    <strong id="shipperActiveCount">0</strong>
+                                    <small>Currently active</small>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon teal">Ξ</div>
+                                <div>
+                                    <span>Escrow Balance</span>
+                                    <strong id="shipperEscrowValue">0 ETH</strong>
+                                    <small>Locked in contracts</small>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon blue">✓</div>
+                                <div>
+                                    <span>Completed Agreements</span>
+                                    <strong id="shipperCompletedCount">0</strong>
+                                    <small>All time</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                          <div class="panel-card" style="margin-bottom: 24px;">
+                              <div class="panel-heading">
+                                  <div>
+                                      <h2>Needs Attention</h2>
+                                      <p>Expired agreements with funds locked in escrow.</p>
+                                  </div>
+                              </div>
+                              <div class="table-wrapper">
+                                  <table class="app-table">
+                                      <thead>
+                                          <tr>
+                                              <th>ID</th>
+                                              <th>Carrier</th>
+                                              <th>Escrow Balance</th>
+                                              <th>Status</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody id="shipperNeedsAttention">
+                                          <!-- populated via JS -->
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                          
+<div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>Recent Agreements</h2>
+                                    <p>Your latest logistics agreements.</p>
+                                </div>
+
+                                <button data-dashboard-page="agreements"
+                                        class="text-link-button"
+                                        type="button">
+                                    View all →
+                                </button>
+                            </div>
+
+                            <div class="table-wrapper">
+                                <table class="app-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Carrier</th>
+                                        <th>Total Value</th>
+                                        <th>Escrow</th>
+                                        <th>Deadline</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="shipperRecentAgreements">
+                                    <tr>
+                                        <td colspan="6" class="empty-table">
+                                            No agreements available.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+
+                        <div class="info-banner teal-banner dashboard-banner">
+                            <div class="banner-icon">★</div>
+                            <span>
+                                Secure shipments using smart-contract escrow and
+                                milestone-based payments.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-side-column">
+
+                        <div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>Upcoming Deadlines</h2>
+                                    <p>Active agreement deadlines.</p>
+                                </div>
+                            </div>
+
+                            <div id="shipperDeadlineList" class="vertical-list">
+                                <div class="empty-box">No upcoming deadlines.</div>
+                            </div>
+                        </div>
+
+                        <div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>Recent Activity</h2>
+                                    <p>Latest blockchain events.</p>
+                                </div>
+
+                                <button data-dashboard-page="history"
+                                        class="text-link-button"
+                                        type="button">
+                                    View all →
+                                </button>
+                            </div>
+
+                            <div id="shipperRecentActivity" class="activity-list">
+                                <div class="empty-box">No recent activity.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARRIER DASHBOARD -->
+            <div id="carrierDashboardView" style="display:none;">
+
+                <div class="dashboard-heading">
+                    <div>
+                        <h1>Carrier Dashboard</h1>
+                        <p>Overview of your assigned deliveries and Carrier performance.</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-layout">
+
+                    <div>
+                        <div class="three-stat-grid">
+
+                            <div class="stat-card">
+                                <div class="stat-icon blue">▤</div>
+                                <div>
+                                    <span>Assigned Agreements</span>
+                                    <strong id="carrierAssignedCount">0</strong>
+                                    <small>Active assignments</small>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon teal">▣</div>
+                                <div>
+                                    <span>Completed Deliveries</span>
+                                    <strong id="carrierCompletedCount">0</strong>
+                                    <small>Total completed</small>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-icon blue">★</div>
+                                <div>
+                                    <span>Reputation Points</span>
+                                    <strong id="carrierDashboardCRP">0</strong>
+                                    <small>CRP earned</small>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>Assigned Agreements</h2>
+                                    <p>Agreements assigned to your wallet.</p>
+                                </div>
+
+                                <button data-dashboard-page="agreements"
+                                        class="text-link-button"
+                                        type="button">
+                                    View all →
+                                </button>
+                            </div>
+
+                            <div class="table-wrapper">
+                                <table class="app-table">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Shipper</th>
+                                        <th>Total Value</th>
+                                        <th>Deadline</th>
+                                        <th>Milestone</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="carrierAssignedAgreements">
+                                    <tr>
+                                        <td colspan="6" class="empty-table">
+                                            No assigned agreements.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div class="info-banner teal-banner dashboard-banner">
+                            <div class="banner-icon">★</div>
+                            <span>
+                                Complete milestones successfully and build your
+                                Carrier Reputation Points.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-side-column">
+
+                        <div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>My Reputation</h2>
+                                    <p>Blockchain-issued CRP.</p>
+                                </div>
+                            </div>
+
+                            <div class="reputation-dashboard">
+                                <div class="reputation-ring">
+                                    <div>
+                                        <strong id="carrierReputationCircle">0</strong>
+                                        <span>CRP</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <strong class="teal-text">Carrier Reputation</strong>
+                                    <p>Reputation is awarded after verified milestones.</p>
+                                </div>
+                            </div>
+
+                            <div class="two-mini-stats">
+                                <div>
+                                    <span>Verified Milestones</span>
+                                    <strong id="carrierVerifiedMilestones">0</strong>
+                                </div>
+
+                                <div>
+                                    <span>Active Deliveries</span>
+                                    <strong id="carrierActiveDeliveries">0</strong>
+                                </div>
+                            </div>
+
+                            <button data-dashboard-page="reputation"
+                                    class="text-link-button reputation-link"
+                                    type="button">
+                                View reputation details →
+                            </button>
+                        </div>
+
+                        <div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>Pending Verifications</h2>
+                                    <p>Milestones awaiting Shipper verification.</p>
+                                </div>
+                            </div>
+
+                            <div id="carrierPendingVerificationList" class="vertical-list">
+                                <div class="empty-box">No pending verifications.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN DASHBOARD -->
+            <div id="adminDashboardView" style="display:none;">
+                <div class="dashboard-grid">
+                    <div class="dashboard-main-column">
+                        <div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>System Overview</h2>
+                                    <p>Global logistics escrow statistics.</p>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                                <div style="padding: 15px; border: 1px solid #e1e8f0; border-radius: 8px; background: #f8fafc;">
+                                    <span style="display: block; font-size: 11px; color: #68788c; margin-bottom: 5px;">Total Agreements</span>
+                                    <strong id="adminTotalAgreements" style="font-size: 18px; color: #1a2b4c;">0</strong>
+                                </div>
+                                <div style="padding: 15px; border: 1px solid #e1e8f0; border-radius: 8px; background: #f8fafc;">
+                                    <span style="display: block; font-size: 11px; color: #68788c; margin-bottom: 5px;">Active</span>
+                                    <strong id="adminActiveCount" style="font-size: 18px; color: #1a2b4c;">0</strong>
+                                </div>
+                                <div style="padding: 15px; border: 1px solid #e1e8f0; border-radius: 8px; background: #f8fafc;">
+                                    <span style="display: block; font-size: 11px; color: #68788c; margin-bottom: 5px;">Completed</span>
+                                    <strong id="adminCompletedCount" style="font-size: 18px; color: #1a2b4c;">0</strong>
+                                </div>
+                                <div style="padding: 15px; border: 1px solid #e1e8f0; border-radius: 8px; background: #f8fafc;">
+                                    <span style="display: block; font-size: 11px; color: #68788c; margin-bottom: 5px;">Expired</span>
+                                    <strong id="adminExpiredCount" style="font-size: 18px; color: #e11d48;">0</strong>
+                                </div>
+                                <div style="padding: 15px; border: 1px solid #e1e8f0; border-radius: 8px; background: #f8fafc;">
+                                    <span style="display: block; font-size: 11px; color: #68788c; margin-bottom: 5px;">Refunded</span>
+                                    <strong id="adminRefundedCount" style="font-size: 18px; color: #1a2b4c;">0</strong>
+                                </div>
+                                <div style="padding: 15px; border: 1px solid #e1e8f0; border-radius: 8px; background: #f8fafc;">
+                                    <span style="display: block; font-size: 11px; color: #68788c; margin-bottom: 5px;">Global Escrow Balance</span>
+                                    <strong id="adminGlobalEscrow" style="font-size: 18px; color: #1a2b4c;">0 ETH</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>Recent Agreements</h2>
+                                    <p>Latest agreements created in the system.</p>
+                                </div>
+                            </div>
+                            <div class="table-wrapper">
+                                <table class="app-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Shipper</th>
+                                            <th>Carrier</th>
+                                            <th>Total</th>
+                                            <th>Escrow</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="adminAllAgreements">
+                                        <!-- populated via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="dashboard-side-column">
+                        
+
+                        <div class="panel-card">
+                            <div class="panel-heading">
+                                <div>
+                                    <h2>System Users</h2>
+                                    <p>Total Registered: <span id="adminTotalUsers">0</span></p>
+                                </div>
+                            </div>
+                            <div class="history-filter-panel">
+                                <div class="form-field no-margin">
+                                    <label>Search Users</label>
+                                    <input type="text" id="adminUserSearch" placeholder="Search by name or wallet...">
+                                </div>
+                                <div class="form-field no-margin">
+                                    <label>Role Filter</label>
+                                    <select id="adminUserFilter">
+                                        <option value="all">All Roles</option>
+                                        <option value="1">Shippers</option>
+                                        <option value="2">Carriers</option>
+                                        <option value="3">Admins</option>
+                                    </select>
+                                </div>
+                                <button id="resetAdminUserFilters" class="secondary-button" type="button" onclick="document.getElementById('adminUserSearch').value=''; document.getElementById('adminUserFilter').value='all'; renderAdminUserList();">
+                                    Reset Filters
+                                </button>
+                            </div>
+                            <div id="adminUserList" class="vertical-list" style="max-height: 400px; overflow-y: auto;">
+                                <!-- populated via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== AGREEMENTS LIST ==================== -->
+        <section id="page-agreements" class="app-page">
+
+            <div class="page-heading-with-action">
+                <div>
+                    <h1>Agreements</h1>
+                    <p>View and manage agreements related to your connected wallet.</p>
+                </div>
+
+                <button id="openCreateAgreement"
+                        class="primary-button shipper-only"
+                        type="button">
+                    + Create Agreement
+                </button>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-heading">
+                    <div>
+                        <h2 id="agreementListTitle">My Agreements</h2>
+                        <p>Blockchain logistics agreements.</p>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="app-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th id="agreementCounterpartyHeader">Counterparty</th>
+                            <th>Total Value</th>
+                            <th>Escrow</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="agreementListBody">
+                        <tr>
+                            <td colspan="7" class="empty-table">
+                                No agreements available.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== CREATE AGREEMENT ==================== -->
+        <section id="page-create-agreement" class="app-page">
+
+            <button id="backFromCreateAgreement" class="back-button" type="button">
+                ← Back to Agreements
+            </button>
+
+            <div class="standalone-heading">
+                <h1>Create Logistics Agreement</h1>
+                <p>
+                    Define the Carrier, milestone distribution and escrow amount
+                    for your shipment.
+                </p>
+            </div>
+
+            <div class="create-agreement-layout">
+
+                <div class="panel-card">
+
+                    <div class="section-title">
+                        <div class="round-icon">▤</div>
+                        <div>
+                            <h2>Agreement Details</h2>
+                            <p>Enter payment and milestone information.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Carrier Wallet Address</label>
+                        <input id="carrierAddress"
+                               type="text"
+                               placeholder="0x... wallet address">
+                        <small>Enter a registered Carrier wallet address.</small>
+                    </div>
+
+                    <div class="three-field-grid">
+
+                        <div class="form-field">
+                            <label>Total Amount (ETH)</label>
+                            <input id="totalAmount"
+                                   type="number"
+                                   min="0"
+                                   step="0.01"
+                                   placeholder="0.00">
+                            <small>Total escrow amount.</small>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Pickup Amount (ETH)</label>
+                            <input id="pickupAmount"
+                                   type="number"
+                                   min="0"
+                                   step="0.01"
+                                   placeholder="0.00">
+                            <small id="pickupPercentageText">
+                                Pickup milestone allocation.
+                            </small>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Delivery Amount (ETH)</label>
+                            <input id="deliveryAmount"
+                                   type="number"
+                                   min="0"
+                                   step="0.01"
+                                   placeholder="0.00">
+                            <small id="deliveryPercentageText">
+                                Final Delivery allocation.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div id="distributionValidation"
+                         class="warning-box red-warning"
+                         style="display:none;">
+                        ⚠ Pickup + Delivery must equal Total Amount.
+                    </div>
+
+                    <div class="form-field">
+                        <label>Delivery Deadline</label>
+                        <input id="deadline" type="datetime-local">
+                        <small>The deadline must be in the future.</small>
+                    </div>
+
+                    <!-- FILE ATTACHMENT: Create Agreement -->
+                    <div class="file-attachment-panel" id="createAgreementAttachmentPanel">
+                        <div class="file-attachment-header">
+                            <div class="file-attachment-header-icon">📎</div>
+                            <div class="file-attachment-header-text">
+                                <h3>Supporting Documents <span class="file-count-badge" id="createAgreementFileCount">0</span></h3>
+                                <p>Attach contracts, manifests, or any relevant files.</p>
+                            </div>
+                        </div>
+                        <div class="file-attachment-body">
+                            <div class="file-drop-zone" id="createAgreementDropZone">
+                                <input type="file" class="file-drop-input" id="createAgreementFileInput" multiple accept="*/*">
+                                <span class="file-drop-icon">📁</span>
+                                <p class="file-drop-title">Drag &amp; drop files here</p>
+                                <p class="file-drop-subtitle">or <span>browse to upload</span> &middot; Max 10MB per file</p>
+                            </div>
+                            <div class="file-list" id="createAgreementFileList"></div>
+                            <div class="file-attachment-note">
+                                <strong>ℹ</strong>
+                                <span>Files are saved to the server and accessible to both Shipper and Carrier.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-action-row">
+                        <button id="createAgreement"
+                                class="primary-button large-button"
+                                type="button">
+                            Create Agreement
+                        </button>
+
+                        <button id="resetAgreementForm"
+                                class="secondary-button large-button"
+                                type="button">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <div class="right-stack">
+
+                    <div class="panel-card">
+
+                        <div class="section-title">
+                            <div class="round-icon">◔</div>
+                            <div>
+                                <h2>Milestone Distribution</h2>
+                                <p>Funds released by milestone.</p>
+                            </div>
+                        </div>
+
+                        <div class="distribution-layout">
+
+                            <div id="distributionCircle" class="distribution-circle">
+                                <div>
+                                    <strong>100%</strong>
+                                    <span>Total Escrow</span>
+                                </div>
+                            </div>
+
+                            <div class="distribution-info">
+                                <div>
+                                    <span>Pickup</span>
+                                    <strong id="pickupPercentage">0%</strong>
+                                    <small id="pickupPreview">0 ETH</small>
+                                </div>
+
+                                <div>
+                                    <span>Final Delivery</span>
+                                    <strong id="deliveryPercentage">0%</strong>
+                                    <small id="deliveryPreview">0 ETH</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="small-info-box">
+                            Funds remain securely in escrow until each milestone is verified.
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+
+                        <div class="section-title">
+                            <div class="round-icon">▤</div>
+                            <div>
+                                <h2>Agreement Summary</h2>
+                                <p>Preview before creation.</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Agreement Status</span>
+                            <strong>Created</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Created By</span>
+                            <strong>Shipper</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Milestones</span>
+                            <strong>2</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Total Amount</span>
+                            <strong id="createSummaryTotal">0 ETH</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Network</span>
+                            <strong>Ethereum Sepolia</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Escrow Status</span>
+                            <strong>Not Funded</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== AGREEMENT DETAIL ==================== -->
+        <section id="page-agreement-detail" class="app-page">
+
+            <button id="backFromAgreementDetail" class="back-button" type="button">
+                ← Back to Agreements
+            </button>
+
+            <div class="agreement-detail-title">
+                <div>
+                    <h1>
+                        Agreement #<span id="detailPageId">-</span>
+                    </h1>
+                    <p>Review agreement details and milestone progress.</p>
+                </div>
+
+                <span id="detailPageStatus"
+                      class="status-badge status-created">
+                    -
+                </span>
+            </div>
+
+            <div class="agreement-detail-layout">
+
+                <div>
+
+                    <div class="panel-card">
+
+                        <div class="section-title">
+                            <div class="round-icon">▤</div>
+                            <h2>Agreement Summary</h2>
+                        </div>
+
+                        <div class="detail-summary-row">
+                            <span>Shipper Address</span>
+                            <strong id="detailPageShipper">-</strong>
+                        </div>
+
+                        <div class="detail-summary-row">
+                            <span>Carrier Address</span>
+                            <strong id="detailPageCarrier">-</strong>
+                        </div>
+
+                        <div class="detail-summary-row">
+                            <span>Total Value</span>
+                            <strong id="detailPageTotal">-</strong>
+                        </div>
+
+                        <div class="detail-summary-row">
+                            <span>Escrow Balance</span>
+                            <strong id="detailPageEscrow">-</strong>
+                        </div>
+
+                        <div class="detail-summary-row">
+                            <span>Delivery Deadline</span>
+                            <strong id="detailPageDeadline">-</strong>
+                        </div>
+
+                        <div class="detail-summary-row">
+                            <span>Created At</span>
+                            <strong id="detailPageCreated">-</strong>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+
+                        <div class="section-title">
+                            <div class="round-icon">⚑</div>
+                            <div>
+                                <h2>Milestones</h2>
+                                <p>Funds are released after verification.</p>
+                            </div>
+                        </div>
+
+                        <div class="milestone-row">
+                            <div class="milestone-number">1</div>
+
+                            <div class="milestone-description">
+                                <strong>Pickup</strong>
+                                <span>Shipment pickup milestone.</span>
+                            </div>
+
+                            <strong id="detailPagePickupAmount">-</strong>
+
+                            <span id="detailPagePickupStatus"
+                                  class="milestone-status pending">
+                                -
+                            </span>
+                        </div>
+
+                        <div class="milestone-row">
+                            <div class="milestone-number">2</div>
+
+                            <div class="milestone-description">
+                                <strong>Final Delivery</strong>
+                                <span>Final shipment delivery.</span>
+                            </div>
+
+                            <strong id="detailPageDeliveryAmount">-</strong>
+
+                            <span id="detailPageDeliveryStatus"
+                                  class="milestone-status pending">
+                                -
+                            </span>
+                        </div>
+
+                        
+                        <div class="small-info-box">
+                            Escrow funds are released according to the milestone
+                            amounts defined by the Shipper.
+                        </div>
+
+                        <div class="small-info-box" id="detailRejectionReasonBox" style="display: none; background: #fff0f0; border: 1px solid #ffccd5; color: #e11d48; margin-top: 15px;">
+                            <strong>Rejection/Cancellation Reason:</strong>
+                            <span id="detailPageRejectionReason" style="display: block; margin-top: 5px; color: #526b8d;"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div>
+                    <div class="panel-card action-card">
+                        <h2 id="detailActionTitle">Agreement Action</h2>
+                        <p id="detailActionDescription">
+                            Loading available action...
+                        </p>
+
+                        <div id="detailActionContent"></div>
+
+                    </div>
+
+                    <!-- SHARED FILE VIEWER: visible to both Shipper and Carrier -->
+                    <div class="panel-card" style="margin-top: 20px;">
+                        <div class="section-title">
+                            <div class="round-icon">📎</div>
+                            <div>
+                                <h2>
+                                    Agreement Documents
+                                    <span class="file-count-badge" id="detailSharedFilesBadge">0</span>
+                                </h2>
+                                <p>Files uploaded by Shipper and Carrier for this agreement.</p>
+                            </div>
+                        </div>
+                        <div id="detailSharedFiles" style="margin-top: 12px;">
+                            <div class="file-empty-state">No documents attached yet.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ==================== VERIFY MILESTONE ==================== -->
+        <section id="page-verify-milestone" class="app-page">
+
+            <button id="backFromVerify" class="back-button" type="button">
+                ← Back to Agreement
+            </button>
+
+            <div class="standalone-heading">
+                <h1>Verify Milestone & Release Payment</h1>
+                <p>
+                    Confirm successful milestone completion and release
+                    the payment from escrow.
+                </p>
+            </div>
+
+            <div class="verify-layout">
+                <div>
+                    <div class="panel-card">
+                        <div class="agreement-inline-title">
+                            <strong>
+                                Agreement #
+                                <span id="verifyPageAgreementId">-</span>
+                            </strong>
+
+                            <span id="verifyPageAgreementStatus"
+                                  class="status-badge status-progress">
+                                In Progress
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <h2>Milestone Under Review</h2>
+
+                        <div class="verify-milestone-heading">
+                            <div class="large-round-icon">✓</div>
+
+                            <div>
+                                <h2 id="verifyPageMilestoneName">
+                                    Pickup Milestone
+                                </h2>
+                                <span>Submitted by Carrier</span>
+                            </div>
+
+                            <span class="submitted-tag">
+                                Submitted
+                            </span>
+                        </div>
+
+                        <div class="two-info-grid">
+                            <div>
+                                <span>Carrier Address</span>
+                                <strong id="verifyPageCarrier">-</strong>
+                            </div>
+
+                            <div>
+                                <span>Payment Amount</span>
+                                <strong id="verifyPagePayment">-</strong>
+                            </div>
+                        </div>
+
+                        <div class="warning-box orange-warning">
+                            ⚠ Verification will immediately release this milestone
+                            payment to the Carrier. This transaction cannot be undone.
+                        </div>
+
+                        <!-- FILE ATTACHMENT: Verify Milestone -->
+                        <div class="file-attachment-panel" id="verifyAttachmentPanel">
+                            <div class="file-attachment-header">
+                                <div class="file-attachment-header-icon">📎</div>
+                                <div class="file-attachment-header-text">
+                                    <h3>Verification Evidence <span class="file-count-badge" id="verifyFileCount">0</span></h3>
+                                    <p>Attach proof of milestone completion before verifying.</p>
+                                </div>
+                            </div>
+                            <div class="file-attachment-body">
+                                <div class="file-drop-zone" id="verifyDropZone">
+                                    <input type="file" class="file-drop-input" id="verifyFileInput" multiple accept="*/*">
+                                    <span class="file-drop-icon">🔍</span>
+                                    <p class="file-drop-title">Drag &amp; drop evidence files</p>
+                                    <p class="file-drop-subtitle">or <span>browse to upload</span> &middot; Photos, PDFs, receipts</p>
+                                </div>
+                                <div class="file-list" id="verifyFileList"></div>
+                                <div class="file-attachment-note">
+                                    <strong>ℹ</strong>
+                                    <span>Files are saved to the server and accessible to both Shipper and Carrier.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="confirmVerifyMilestone"
+                                class="primary-button large-button full-width-button"
+                                type="button">
+                            Verify &amp; Release Payment
+                        </button>
+                        <button class="primary-button large-button full-width-button"
+                          style="margin-top: 12px; background: linear-gradient(90deg, #d32f2f, #f44336);"
+                          type="button"
+                                onclick="document.getElementById('rejectMilestoneModal').style.display='flex'">
+                            Reject Milestone
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <h2>Escrow Summary</h2>
+
+                    <div class="escrow-box">
+                        <span>Total Value</span>
+                        <strong id="verifyPageTotal">-</strong>
+                    </div>
+
+                    <div class="escrow-box">
+                        <span>Current Escrow Balance</span>
+                        <strong id="verifyPageCurrentEscrow">-</strong>
+                    </div>
+
+                    <div class="escrow-box">
+                        <span>Payment to Release</span>
+                        <strong id="verifyPageReleaseAmount">-</strong>
+                    </div>
+
+                    <div class="escrow-box">
+                        <span>Remaining After Release</span>
+                        <strong id="verifyPageRemaining">-</strong>
+                    </div>
+
+                    <div class="info-banner teal-banner compact-banner">
+                        <div class="banner-icon">★</div>
+                        <span>
+                            Carrier Reputation Points will also be awarded
+                            after successful verification.
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== SUBMIT MILESTONE ==================== -->
+        <section id="page-submit-milestone" class="app-page">
+
+            <button id="backFromSubmit" class="back-button" type="button">
+                ← Back to Agreement
+            </button>
+
+            <div class="standalone-heading">
+                <h1>Submit Milestone Completion</h1>
+                <p>
+                    Mark the logistics milestone as completed and submit it
+                    for Shipper verification.
+                </p>
+            </div>
+
+            <div class="panel-card">
+                <div class="section-title">
+                    <div class="round-icon">▤</div>
+                    <div>
+                        <h2>Agreement Summary</h2>
+                        <p>
+                            Agreement #
+                            <span id="submitPageAgreementId">-</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="four-info-grid">
+                    <div>
+                        <span>Shipper</span>
+                        <strong id="submitPageShipper">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Carrier</span>
+                        <strong id="submitPageCarrier">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Total Value</span>
+                        <strong id="submitPageTotal">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Deadline</span>
+                        <strong id="submitPageDeadline">-</strong>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="milestone-section-heading">Milestones</h2>
+
+            <div id="submitPickupCard" class="submit-milestone-card">
+                <div class="milestone-number">1</div>
+
+                <div class="submit-milestone-content">
+                    <h2>Pickup Milestone</h2>
+                    <p>Confirm successful pickup of the shipment.</p>
+
+                    <div class="two-info-grid submit-info">
+                        <div>
+                            <span>Payment</span>
+                            <strong id="submitPagePickupAmount">-</strong>
+                        </div>
+
+                        <div>
+                            <span>Status</span>
+                            <strong id="submitPagePickupStatus">-</strong>
+                        </div>
+                    </div>
+
+                    <!-- FILE ATTACHMENT: Pickup -->
+                    <div class="file-attachment-panel" id="pickupAttachmentPanel">
+                        <div class="file-attachment-header">
+                            <div class="file-attachment-header-icon">📎</div>
+                            <div class="file-attachment-header-text">
+                                <h3>Pickup Proof <span class="file-count-badge" id="pickupFileCount">0</span></h3>
+                                <p>Attach pickup receipts, photos, or confirmation docs.</p>
+                            </div>
+                        </div>
+                        <div class="file-attachment-body">
+                            <div class="file-drop-zone" id="pickupDropZone">
+                                <input type="file" class="file-drop-input" id="pickupFileInput" multiple accept="*/*">
+                                <span class="file-drop-icon">📦</span>
+                                <p class="file-drop-title">Drag &amp; drop pickup evidence</p>
+                                <p class="file-drop-subtitle">or <span>browse to upload</span> &middot; Photos, PDFs, waybills</p>
+                            </div>
+                            <div class="file-list" id="pickupFileList"></div>
+                            <div class="file-attachment-note">
+                                <strong>ℹ</strong>
+                                <span>Files are saved to the server and accessible to both Shipper and Carrier.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="submitPickupButton"
+                        class="primary-button large-button"
+                        type="button" style="margin-bottom: 12px; width: 100%;">
+                    Submit Pickup Completion
+                </button>
+            </div>
+
+            <div id="submitDeliveryCard" class="submit-milestone-card">
+                <div class="milestone-number">2</div>
+
+                <div class="submit-milestone-content">
+                    <h2>Final Delivery Milestone</h2>
+                    <p>Confirm successful Final Delivery.</p>
+
+                    <div class="two-info-grid submit-info">
+                        <div>
+                            <span>Payment</span>
+                            <strong id="submitPageDeliveryAmount">-</strong>
+                        </div>
+
+                        <div>
+                            <span>Status</span>
+                            <strong id="submitPageDeliveryStatus">-</strong>
+                        </div>
+                    </div>
+
+                    <!-- FILE ATTACHMENT: Delivery -->
+                    <div class="file-attachment-panel" id="deliveryAttachmentPanel">
+                        <div class="file-attachment-header">
+                            <div class="file-attachment-header-icon">📎</div>
+                            <div class="file-attachment-header-text">
+                                <h3>Delivery Proof <span class="file-count-badge" id="deliveryFileCount">0</span></h3>
+                                <p>Attach delivery receipts, photos, or POD documents.</p>
+                            </div>
+                        </div>
+                        <div class="file-attachment-body">
+                            <div class="file-drop-zone" id="deliveryDropZone">
+                                <input type="file" class="file-drop-input" id="deliveryFileInput" multiple accept="*/*">
+                                <span class="file-drop-icon">🚚</span>
+                                <p class="file-drop-title">Drag &amp; drop delivery evidence</p>
+                                <p class="file-drop-subtitle">or <span>browse to upload</span> &middot; Photos, PDFs, POD</p>
+                            </div>
+                            <div class="file-list" id="deliveryFileList"></div>
+                            <div class="file-attachment-note">
+                                <strong>ℹ</strong>
+                                <span>Files are saved to the server and accessible to both Shipper and Carrier.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="submitDeliveryButton"
+                        class="primary-button large-button"
+                        type="button" style="margin-bottom: 12px; width: 100%;">
+                    Submit Delivery Completion
+                </button>
+            </div>
+
+        </section>
+
+        <!-- ==================== REPUTATION ==================== -->
+        <section id="page-reputation" class="app-page">
+
+            <div class="standalone-heading">
+                <h1>Reputation</h1>
+                <p>
+                    Carrier Reputation Points are awarded after verified
+                    logistics milestones.
+                </p>
+            </div>
+
+            <!-- CARRIER -->
+            <div id="carrierOwnReputationView" style="display:none;">
+
+                <div class="reputation-layout">
+
+                    <div class="panel-card carrier-profile-card">
+                        <div class="carrier-profile">
+
+                            <div class="carrier-avatar">🚚</div>
+
+                            <div>
+                                <h2>Carrier Profile</h2>
+                                <strong id="reputationOwnAddress">-</strong>
+                                <span class="role-chip">Carrier</span>
+                            </div>
+
+                            <div class="large-reputation">
+                                <span>Reputation Points</span>
+                                <strong id="carrierReputation">0</strong>
+                                <small>CRP</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reputation-stat-column">
+                        <div class="reputation-stat-card">
+                            <span>Verified Milestones</span>
+                            <strong id="reputationVerifiedMilestones">0</strong>
+                        </div>
+
+                        <div class="reputation-stat-card">
+                            <span>Completed Agreements</span>
+                            <strong id="reputationCompletedAgreements">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-banner teal-banner dashboard-banner">
+                    <div class="banner-icon">★</div>
+                    <span>
+                        CRP is awarded when the Shipper successfully verifies
+                        Pickup or Final Delivery milestones.
+                    </span>
+                </div>
+            </div>
+
+            <!-- SHIPPER -->
+            <div id="shipperReputationView" style="display:none;">
+
+                <div class="panel-card">
+                    <div class="section-title">
+                        <div class="round-icon">♢</div>
+                        <div>
+                            <h2>All Carriers Reputation</h2>
+                            <p>Check the CRP balance of all registered Carriers.</p>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="app-table">
+                            <thead>
+                                <tr>
+                                    <th>Carrier Address</th>
+                                    <th>Reputation Points (CRP)</th>
+                                    <th>Verified Milestones</th>
+                                    <th>Completed Agreements</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allCarriersReputationBody">
+                                <tr>
+                                    <td colspan="4" class="empty-table">
+                                        Click "Refresh Reputation List" to load data.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== HISTORY ==================== -->
+        <section id="page-history" class="app-page">
+
+            <div class="standalone-heading">
+                <h1>Transaction History</h1>
+                <p id="historyRoleDescription">
+                    View blockchain activity related to your agreements.
+                </p>
+            </div>
+
+            <div class="history-filter-panel">
+
+                <div class="form-field no-margin">
+                    <label>Agreement ID</label>
+                    <input id="historyAgreementFilter"
+                           type="text"
+                           placeholder="Search Agreement ID...">
+                </div>
+
+                <div class="form-field no-margin">
+                    <label>Action Type</label>
+
+                    <select id="historyActionFilter">
+                        <option value="all">All Actions</option>
+                        <option value="AgreementCreated">Agreement Created</option>
+                        <option value="AgreementFunded">Escrow Funded</option>
+                        <option value="MilestoneSubmitted">Milestone Submitted</option>
+                        <option value="MilestoneVerified">Milestone Verified</option>
+                        <option value="PaymentReleased">Payment Released</option>
+                        <option value="RefundIssued">Refund Issued</option>
+                    </select>
+                </div>
+
+                <button id="resetHistoryFilters"
+                        class="secondary-button"
+                        type="button">
+                    Reset Filters
+                </button>
+            </div>
+
+            <div class="panel-card history-table-panel">
+                <div class="table-wrapper">
+                    <table class="app-table">
+                        <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Agreement</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                            <th>Amount</th>
+                            <th>Transaction Hash</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="roleHistoryTableBody">
+                        <tr>
+                            <td colspan="6" class="empty-table">
+                                No history available.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination-controls" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-top: 1px solid #e1e8f0;">
+                    <button id="prevHistoryPage" class="secondary-button" type="button" disabled>← Previous</button>
+                    <span id="historyPageIndicator" style="font-size: 13px; color: #68788c; font-weight: 600;">Page 1</span>
+                    <button id="nextHistoryPage" class="secondary-button" type="button" disabled>Next →</button>
+                </div>
+            </div>
+
+            <div class="history-summary-grid">
+                <div>
+                    <span>Total Transactions</span>
+                    <strong id="roleHistoryCount">0</strong>
+                </div>
+
+                <div>
+                    <span>Latest Activity</span>
+                    <strong id="roleLatestActivity">-</strong>
+                </div>
+
+                <div>
+                    <span>Network</span>
+                    <strong>Ethereum Sepolia</strong>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+<!-- REJECT MODAL -->
+<div id="rejectModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="cancelModalTitle">Cancel Agreement</h2>
+            <button class="close-modal" id="closeRejectModal" onclick="document.getElementById('rejectModal').style.display='none'">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to reject this agreement? This action cannot be undone.</p>
+            <div class="form-field">
+                <label>Reason for rejection (Comment)</label>
+                <textarea id="rejectComment" rows="3" placeholder="Enter reason here..." class="app-input"></textarea>
+            </div>
+            <button id="confirmRejectBtn" class="primary-button" style="background: var(--danger); width: 100%; margin-top: 15px;" type="button" onclick="confirmRejectAgreement()">
+                Confirm Cancellation
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- REJECT MILESTONE MODAL -->
+<div id="rejectMilestoneModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="rejectMilestoneTitle">Reject Milestone</h2>
+            <button class="close-modal" onclick="document.getElementById('rejectMilestoneModal').style.display='none'">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to reject this milestone submission? The carrier will have to re-submit.</p>
+            <div class="form-field">
+                <label>Reason for rejection</label>
+                <textarea id="rejectMilestoneComment" rows="3" placeholder="Enter reason here..." class="app-input"></textarea>
+            </div>
+            <button id="confirmRejectMilestoneBtn" class="primary-button" style="background: var(--danger); width: 100%; margin-top: 15px;" type="button" onclick="confirmRejectMilestone()">
+                Confirm Rejection
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<!-- Web3 and App Logic -->
+<script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
