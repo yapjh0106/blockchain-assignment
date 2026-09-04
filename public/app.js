@@ -2541,7 +2541,7 @@ async function loadRoleHistory() {
         }
     );
 
-    currentRoleHistory = events
+    const filteredEvents = events
         .filter(event =>
             event.returnValues.id !== undefined &&
             allowedIds.has(
@@ -2549,8 +2549,21 @@ async function loadRoleHistory() {
                     event.returnValues.id
                 )
             )
-        )
-        .sort(sortEventsNewestFirst);
+        );
+
+    currentRoleHistory = await Promise.all(filteredEvents.map(async (event) => {
+        if (!event.returnValues.timestamp) {
+            try {
+                const block = await web3.eth.getBlock(event.blockNumber);
+                event.returnValues.timestamp = block.timestamp;
+            } catch (e) {
+                event.returnValues.timestamp = Math.floor(Date.now() / 1000);
+            }
+        }
+        return event;
+    }));
+
+    currentRoleHistory.sort(sortEventsNewestFirst);
 
     document.getElementById("historyRoleDescription").textContent =
         currentRole === 1
