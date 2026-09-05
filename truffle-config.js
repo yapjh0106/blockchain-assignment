@@ -18,7 +18,7 @@ module.exports = {
         timeoutBlocks: 200,
         pollingInterval: 12000
       }),
-      network_id: 11155111,
+      network_id: "*",
       gas: 4000000,
       confirmations: 0,
       timeoutBlocks: 200,

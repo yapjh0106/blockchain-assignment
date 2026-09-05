@@ -557,7 +557,7 @@ contract LogisticsEscrow {
     // CANCEL AGREEMENT
     // =========================
 
-    function cancelAgreementByShipper(uint256 _id) public agreementExists(_id) {
+    function cancelAgreementByShipper(uint256 _id, string calldata _reason) public agreementExists(_id) {
         Agreement storage agreement = agreements[_id];
 
         require(msg.sender == agreement.shipper, "Only Shipper can cancel");
@@ -565,7 +565,7 @@ contract LogisticsEscrow {
 
         agreement.status = AgreementStatus.Rejected;
         
-        emit AgreementCancelled(_id, msg.sender, "Cancelled by Shipper before funding", 0);
+        emit AgreementCancelled(_id, msg.sender, _reason, 0);
     }
 
     function cancelAgreementByCarrier(uint256 _id, string calldata _reason) public agreementExists(_id) {

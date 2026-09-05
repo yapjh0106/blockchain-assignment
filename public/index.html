@@ -727,7 +727,7 @@
                                    min="0"
                                    step="0.01"
                                    placeholder="0.00">
-                            <small>Total escrow amount.</small>
+                            <small id="totalAmountUsd" style="color: #2e7d32; font-weight: bold; margin-top: 5px;"></small>
                         </div>
 
                         <div class="form-field">
@@ -737,9 +737,7 @@
                                    min="0"
                                    step="0.01"
                                    placeholder="0.00">
-                            <small id="pickupPercentageText">
-                                Pickup milestone allocation.
-                            </small>
+                            <small id="pickupAmountUsd" style="color: #2e7d32; font-weight: bold; margin-top: 5px;"></small>
                         </div>
 
                         <div class="form-field">
@@ -749,9 +747,7 @@
                                    min="0"
                                    step="0.01"
                                    placeholder="0.00">
-                            <small id="deliveryPercentageText">
-                                Final Delivery allocation.
-                            </small>
+                            <small id="deliveryAmountUsd" style="color: #2e7d32; font-weight: bold; margin-top: 5px;"></small>
                         </div>
                     </div>
 
@@ -1570,7 +1566,7 @@
 
 <!-- Web3 and App Logic -->
 <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=8"></script>
 
 </body>
 </html>

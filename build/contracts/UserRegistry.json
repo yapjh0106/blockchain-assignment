@@ -2789,7 +2789,7 @@
                 }
               ]
             },
-            "name": "abi_encode_tuple_t_enum$_Role_$2008_t_stringliteral_dd461f7a057ddf7203381cfeb18d9a007bd3e9b45fa1efec12b4c520e431169c_t_uint256__to_t_uint8_t_string_memory_ptr_t_uint256__fromStack_reversed",
+            "name": "abi_encode_tuple_t_enum$_Role_$2010_t_stringliteral_dd461f7a057ddf7203381cfeb18d9a007bd3e9b45fa1efec12b4c520e431169c_t_uint256__to_t_uint8_t_string_memory_ptr_t_uint256__fromStack_reversed",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -2823,7 +2823,7 @@
           }
         ]
       },
-      "contents": "{\n    { }\n    function panic_error_0x21()\n    {\n        mstore(0, shl(224, 0x4e487b71))\n        mstore(4, 0x21)\n        revert(0, 0x24)\n    }\n    function panic_error_0x41()\n    {\n        mstore(0, shl(224, 0x4e487b71))\n        mstore(4, 0x41)\n        revert(0, 0x24)\n    }\n    function extract_byte_array_length(data) -> length\n    {\n        length := shr(1, data)\n        let outOfPlaceEncoding := and(data, 1)\n        if iszero(outOfPlaceEncoding) { length := and(length, 0x7f) }\n        if eq(outOfPlaceEncoding, lt(length, 32))\n        {\n            mstore(0, shl(224, 0x4e487b71))\n            mstore(4, 0x22)\n            revert(0, 0x24)\n        }\n    }\n    function array_dataslot_string_storage(ptr) -> data\n    {\n        mstore(0, ptr)\n        data := keccak256(0, 0x20)\n    }\n    function clean_up_bytearray_end_slots_string_storage(array, len, startIndex)\n    {\n        if gt(len, 31)\n        {\n            let _1 := 0\n            mstore(_1, array)\n            let data := keccak256(_1, 0x20)\n            let deleteStart := add(data, shr(5, add(startIndex, 31)))\n            if lt(startIndex, 0x20) { deleteStart := data }\n            let _2 := add(data, shr(5, add(len, 31)))\n            let start := deleteStart\n            for { } lt(start, _2) { start := add(start, 1) }\n            { sstore(start, _1) }\n        }\n    }\n    function extract_used_part_and_set_length_of_short_byte_array(data, len) -> used\n    {\n        used := or(and(data, not(shr(shl(3, len), not(0)))), shl(1, len))\n    }\n    function copy_byte_array_to_storage_from_t_string_memory_ptr_to_t_string_storage(slot, src)\n    {\n        let newLen := mload(src)\n        if gt(newLen, sub(shl(64, 1), 1)) { panic_error_0x41() }\n        clean_up_bytearray_end_slots_string_storage(slot, extract_byte_array_length(sload(slot)), newLen)\n        let srcOffset := 0\n        let srcOffset_1 := 0x20\n        srcOffset := srcOffset_1\n        switch gt(newLen, 31)\n        case 1 {\n            let loopEnd := and(newLen, not(31))\n            let dstPtr := array_dataslot_string_storage(slot)\n            let i := 0\n            for { } lt(i, loopEnd) { i := add(i, srcOffset_1) }\n            {\n                sstore(dstPtr, mload(add(src, srcOffset)))\n                dstPtr := add(dstPtr, 1)\n                srcOffset := add(srcOffset, srcOffset_1)\n            }\n            if lt(loopEnd, newLen)\n            {\n                let lastValue := mload(add(src, srcOffset))\n                sstore(dstPtr, and(lastValue, not(shr(and(shl(3, newLen), 248), not(0)))))\n            }\n            sstore(slot, add(shl(1, newLen), 1))\n        }\n        default {\n            let value := 0\n            if newLen\n            {\n                value := mload(add(src, srcOffset))\n            }\n            sstore(slot, extract_used_part_and_set_length_of_short_byte_array(value, newLen))\n        }\n    }\n    function abi_encode_tuple_t_enum$_Role_$2008_t_stringliteral_dd461f7a057ddf7203381cfeb18d9a007bd3e9b45fa1efec12b4c520e431169c_t_uint256__to_t_uint8_t_string_memory_ptr_t_uint256__fromStack_reversed(headStart, value1, value0) -> tail\n    {\n        if iszero(lt(value0, 4))\n        {\n            mstore(0, shl(224, 0x4e487b71))\n            mstore(4, 0x21)\n            revert(0, 0x24)\n        }\n        mstore(headStart, value0)\n        mstore(add(headStart, 32), 96)\n        mstore(add(headStart, 96), 11)\n        mstore(add(headStart, 128), \"Super Admin\")\n        tail := add(headStart, 160)\n        mstore(add(headStart, 64), value1)\n    }\n}",
+      "contents": "{\n    { }\n    function panic_error_0x21()\n    {\n        mstore(0, shl(224, 0x4e487b71))\n        mstore(4, 0x21)\n        revert(0, 0x24)\n    }\n    function panic_error_0x41()\n    {\n        mstore(0, shl(224, 0x4e487b71))\n        mstore(4, 0x41)\n        revert(0, 0x24)\n    }\n    function extract_byte_array_length(data) -> length\n    {\n        length := shr(1, data)\n        let outOfPlaceEncoding := and(data, 1)\n        if iszero(outOfPlaceEncoding) { length := and(length, 0x7f) }\n        if eq(outOfPlaceEncoding, lt(length, 32))\n        {\n            mstore(0, shl(224, 0x4e487b71))\n            mstore(4, 0x22)\n            revert(0, 0x24)\n        }\n    }\n    function array_dataslot_string_storage(ptr) -> data\n    {\n        mstore(0, ptr)\n        data := keccak256(0, 0x20)\n    }\n    function clean_up_bytearray_end_slots_string_storage(array, len, startIndex)\n    {\n        if gt(len, 31)\n        {\n            let _1 := 0\n            mstore(_1, array)\n            let data := keccak256(_1, 0x20)\n            let deleteStart := add(data, shr(5, add(startIndex, 31)))\n            if lt(startIndex, 0x20) { deleteStart := data }\n            let _2 := add(data, shr(5, add(len, 31)))\n            let start := deleteStart\n            for { } lt(start, _2) { start := add(start, 1) }\n            { sstore(start, _1) }\n        }\n    }\n    function extract_used_part_and_set_length_of_short_byte_array(data, len) -> used\n    {\n        used := or(and(data, not(shr(shl(3, len), not(0)))), shl(1, len))\n    }\n    function copy_byte_array_to_storage_from_t_string_memory_ptr_to_t_string_storage(slot, src)\n    {\n        let newLen := mload(src)\n        if gt(newLen, sub(shl(64, 1), 1)) { panic_error_0x41() }\n        clean_up_bytearray_end_slots_string_storage(slot, extract_byte_array_length(sload(slot)), newLen)\n        let srcOffset := 0\n        let srcOffset_1 := 0x20\n        srcOffset := srcOffset_1\n        switch gt(newLen, 31)\n        case 1 {\n            let loopEnd := and(newLen, not(31))\n            let dstPtr := array_dataslot_string_storage(slot)\n            let i := 0\n            for { } lt(i, loopEnd) { i := add(i, srcOffset_1) }\n            {\n                sstore(dstPtr, mload(add(src, srcOffset)))\n                dstPtr := add(dstPtr, 1)\n                srcOffset := add(srcOffset, srcOffset_1)\n            }\n            if lt(loopEnd, newLen)\n            {\n                let lastValue := mload(add(src, srcOffset))\n                sstore(dstPtr, and(lastValue, not(shr(and(shl(3, newLen), 248), not(0)))))\n            }\n            sstore(slot, add(shl(1, newLen), 1))\n        }\n        default {\n            let value := 0\n            if newLen\n            {\n                value := mload(add(src, srcOffset))\n            }\n            sstore(slot, extract_used_part_and_set_length_of_short_byte_array(value, newLen))\n        }\n    }\n    function abi_encode_tuple_t_enum$_Role_$2010_t_stringliteral_dd461f7a057ddf7203381cfeb18d9a007bd3e9b45fa1efec12b4c520e431169c_t_uint256__to_t_uint8_t_string_memory_ptr_t_uint256__fromStack_reversed(headStart, value1, value0) -> tail\n    {\n        if iszero(lt(value0, 4))\n        {\n            mstore(0, shl(224, 0x4e487b71))\n            mstore(4, 0x21)\n            revert(0, 0x24)\n        }\n        mstore(headStart, value0)\n        mstore(add(headStart, 32), 96)\n        mstore(add(headStart, 96), 11)\n        mstore(add(headStart, 128), \"Super Admin\")\n        tail := add(headStart, 160)\n        mstore(add(headStart, 64), value1)\n    }\n}",
       "id": 8,
       "language": "Yul",
       "name": "#utility.yul"
@@ -3652,7 +3652,7 @@
                 }
               ]
             },
-            "name": "abi_encode_tuple_t_enum$_Role_$2008__to_t_uint8__fromStack_reversed",
+            "name": "abi_encode_tuple_t_enum$_Role_$2010__to_t_uint8__fromStack_reversed",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -5761,7 +5761,7 @@
                 }
               ]
             },
-            "name": "abi_decode_tuple_t_enum$_Role_$2008t_string_memory_ptr",
+            "name": "abi_decode_tuple_t_enum$_Role_$2010t_string_memory_ptr",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -8570,7 +8570,7 @@
                 }
               ]
             },
-            "name": "abi_encode_tuple_t_enum$_Role_$2008_t_string_memory_ptr_t_uint256__to_t_uint8_t_string_memory_ptr_t_uint256__fromStack_reversed",
+            "name": "abi_encode_tuple_t_enum$_Role_$2010_t_string_memory_ptr_t_uint256__to_t_uint8_t_string_memory_ptr_t_uint256__fromStack_reversed",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
               {
@@ -8835,7 +8835,7 @@
           }
         ]
       },
-      "contents": "{\n    { }\n    function abi_decode_address(offset) -> value\n    {\n        value := calldataload(offset)\n        if iszero(eq(value, and(value, sub(shl(160, 1), 1)))) { revert(0, 0) }\n    }\n    function abi_decode_tuple_t_address(headStart, dataEnd) -> value0\n    {\n        if slt(sub(dataEnd, headStart), 32) { revert(0, 0) }\n        value0 := abi_decode_address(headStart)\n    }\n    function abi_encode_tuple_t_bool__to_t_bool__fromStack_reversed(headStart, value0) -> tail\n    {\n        tail := add(headStart, 32)\n        mstore(headStart, iszero(iszero(value0)))\n    }\n    function panic_error_0x21()\n    {\n        mstore(0, shl(224, 0x4e487b71))\n        mstore(4, 0x21)\n        revert(0, 0x24)\n    }\n    function abi_encode_enum_Role(value, pos)\n    {\n        if iszero(lt(value, 4))\n        {\n            mstore(0, shl(224, 0x4e487b71))\n            mstore(4, 0x21)\n            revert(0, 0x24)\n        }\n        mstore(pos, value)\n    }\n    function abi_encode_tuple_t_enum$_Role_$2008__to_t_uint8__fromStack_reversed(headStart, value0) -> tail\n    {\n        tail := add(headStart, 32)\n        abi_encode_enum_Role(value0, headStart)\n    }\n    function abi_encode_string(value, pos) -> end\n    {\n        let length := mload(value)\n        mstore(pos, length)\n        let i := 0\n        for { } lt(i, length) { i := add(i, 0x20) }\n        {\n            let _1 := 0x20\n            mstore(add(add(pos, i), _1), mload(add(add(value, i), _1)))\n        }\n        mstore(add(add(pos, length), 0x20), 0)\n        end := add(add(pos, and(add(length, 31), not(31))), 0x20)\n    }\n    function abi_encode_tuple_t_string_memory_ptr__to_t_string_memory_ptr__fromStack_reversed(headStart, value0) -> tail\n    {\n        mstore(headStart, 32)\n        tail := abi_encode_string(value0, add(headStart, 32))\n    }\n    function panic_error_0x41()\n    {\n        mstore(0, shl(224, 0x4e487b71))\n        mstore(4, 0x41)\n        revert(0, 0x24)\n    }\n    function abi_decode_string(offset, end) -> array\n    {\n        if iszero(slt(add(offset, 0x1f), end)) { revert(0, 0) }\n        let _1 := calldataload(offset)\n        let _2 := 0xffffffffffffffff\n        if gt(_1, _2) { panic_error_0x41() }\n        let _3 := not(31)\n        let memPtr := mload(64)\n        let newFreePtr := add(memPtr, and(add(and(add(_1, 0x1f), _3), 63), _3))\n        if or(gt(newFreePtr, _2), lt(newFreePtr, memPtr)) { panic_error_0x41() }\n        mstore(64, newFreePtr)\n        mstore(memPtr, _1)\n        if gt(add(add(offset, _1), 0x20), end) { revert(0, 0) }\n        calldatacopy(add(memPtr, 0x20), add(offset, 0x20), _1)\n        mstore(add(add(memPtr, _1), 0x20), 0)\n        array := memPtr\n    }\n    function abi_decode_tuple_t_addresst_string_memory_ptr(headStart, dataEnd) -> value0, value1\n    {\n        if slt(sub(dataEnd, headStart), 64) { revert(0, 0) }\n        value0 := abi_decode_address(headStart)\n        let offset := calldataload(add(headStart, 32))\n        if gt(offset, 0xffffffffffffffff) { revert(0, 0) }\n        value1 := abi_decode_string(add(headStart, offset), dataEnd)\n    }\n    function abi_decode_tuple_t_enum$_Role_$2008t_string_memory_ptr(headStart, dataEnd) -> value0, value1\n    {\n        if slt(sub(dataEnd, headStart), 64) { revert(0, 0) }\n        let value := calldataload(headStart)\n        if iszero(lt(value, 4)) { revert(0, 0) }\n        value0 := value\n        let offset := calldataload(add(headStart, 32))\n        if gt(offset, 0xffffffffffffffff) { revert(0, 0) }\n        value1 := abi_decode_string(add(headStart, offset), dataEnd)\n    }\n    function abi_encode_tuple_t_address__to_t_address__fromStack_reversed(headStart, value0) -> tail\n    {\n        tail := add(headStart, 32)\n        mstore(headStart, and(value0, sub(shl(160, 1), 1)))\n    }\n    function extract_byte_array_length(data) -> length\n    {\n        length := shr(1, data)\n        let outOfPlaceEncoding := and(data, 1)\n        if iszero(outOfPlaceEncoding) { length := and(length, 0x7f) }\n        if eq(outOfPlaceEncoding, lt(length, 32))\n        {\n            mstore(0, shl(224, 0x4e487b71))\n            mstore(4, 0x22)\n            revert(0, 0x24)\n        }\n    }\n    function abi_encode_tuple_t_stringliteral_eaa6121012bd1d6a2890c6ab893a0743a3947e743ad09ec3bada1e8cc7c35b51__to_t_string_memory_ptr__fromStack_reversed(headStart) -> tail\n    {\n        mstore(headStart, 32)\n        mstore(add(headStart, 32), 32)\n        mstore(add(headStart, 64), \"Only admin can add another admin\")\n        tail := add(headStart, 96)\n    }\n    function abi_encode_tuple_t_stringliteral_a08d66f010282343c63a2adfb2fb2eae7af36c2d0e7cd9b2008665789fb65b40__to_t_string_memory_ptr__fromStack_reversed(headStart) -> tail\n    {\n        mstore(headStart, 32)\n        mstore(add(headStart, 32), 23)\n        mstore(add(headStart, 64), \"User already registered\")\n        tail := add(headStart, 96)\n    }\n    function abi_encode_tuple_t_stringliteral_e64a28d6307a7145b495544047d6dd58370f8e8eaba180f3f161cc4a5b3b551c__to_t_string_memory_ptr__fromStack_reversed(headStart) -> tail\n    {\n        mstore(headStart, 32)\n        mstore(add(headStart, 32), 16)\n        mstore(add(headStart, 64), \"Name is required\")\n        tail := add(headStart, 96)\n    }\n    function array_dataslot_string_storage(ptr) -> data\n    {\n        mstore(0, ptr)\n        data := keccak256(0, 0x20)\n    }\n    function clean_up_bytearray_end_slots_string_storage(array, len, startIndex)\n    {\n        if gt(len, 31)\n        {\n            let _1 := 0\n            mstore(_1, array)\n            let data := keccak256(_1, 0x20)\n            let deleteStart := add(data, shr(5, add(startIndex, 31)))\n            if lt(startIndex, 0x20) { deleteStart := data }\n            let _2 := add(data, shr(5, add(len, 31)))\n            let start := deleteStart\n            for { } lt(start, _2) { start := add(start, 1) }\n            { sstore(start, _1) }\n        }\n    }\n    function extract_used_part_and_set_length_of_short_byte_array(data, len) -> used\n    {\n        used := or(and(data, not(shr(shl(3, len), not(0)))), shl(1, len))\n    }\n    function copy_byte_array_to_storage_from_t_string_memory_ptr_to_t_string_storage(slot, src)\n    {\n        let newLen := mload(src)\n        if gt(newLen, 0xffffffffffffffff) { panic_error_0x41() }\n        clean_up_bytearray_end_slots_string_storage(slot, extract_byte_array_length(sload(slot)), newLen)\n        let srcOffset := 0\n        let srcOffset_1 := 0x20\n        srcOffset := srcOffset_1\n        switch gt(newLen, 31)\n        case 1 {\n            let loopEnd := and(newLen, not(31))\n            let dstPtr := array_dataslot_string_storage(slot)\n            let i := 0\n            for { } lt(i, loopEnd) { i := add(i, srcOffset_1) }\n            {\n                sstore(dstPtr, mload(add(src, srcOffset)))\n                dstPtr := add(dstPtr, 1)\n                srcOffset := add(srcOffset, srcOffset_1)\n            }\n            if lt(loopEnd, newLen)\n            {\n                let lastValue := mload(add(src, srcOffset))\n                sstore(dstPtr, and(lastValue, not(shr(and(shl(3, newLen), 248), not(0)))))\n            }\n            sstore(slot, add(shl(1, newLen), 1))\n        }\n        default {\n            let value := 0\n            if newLen\n            {\n                value := mload(add(src, srcOffset))\n            }\n            sstore(slot, extract_used_part_and_set_length_of_short_byte_array(value, newLen))\n        }\n    }\n    function abi_encode_tuple_t_enum$_Role_$2008_t_string_memory_ptr_t_uint256__to_t_uint8_t_string_memory_ptr_t_uint256__fromStack_reversed(headStart, value2, value1, value0) -> tail\n    {\n        abi_encode_enum_Role(value0, headStart)\n        mstore(add(headStart, 32), 96)\n        tail := abi_encode_string(value1, add(headStart, 96))\n        mstore(add(headStart, 64), value2)\n    }\n    function abi_encode_tuple_t_stringliteral_bfd2107e0248bb83847cb562cee1853a3ab1d6009298682deaefc60611a84797__to_t_string_memory_ptr__fromStack_reversed(headStart) -> tail\n    {\n        mstore(headStart, 32)\n        mstore(add(headStart, 32), 39)\n        mstore(add(headStart, 64), \"Can only register as Shipper or \")\n        mstore(add(headStart, 96), \"Carrier\")\n        tail := add(headStart, 128)\n    }\n}",
+      "contents": "{\n    { }\n    function abi_decode_address(offset) -> value\n    {\n        value := calldataload(offset)\n        if iszero(eq(value, and(value, sub(shl(160, 1), 1)))) { revert(0, 0) }\n    }\n    function abi_decode_tuple_t_address(headStart, dataEnd) -> value0\n    {\n        if slt(sub(dataEnd, headStart), 32) { revert(0, 0) }\n        value0 := abi_decode_address(headStart)\n    }\n    function abi_encode_tuple_t_bool__to_t_bool__fromStack_reversed(headStart, value0) -> tail\n    {\n        tail := add(headStart, 32)\n        mstore(headStart, iszero(iszero(value0)))\n    }\n    function panic_error_0x21()\n    {\n        mstore(0, shl(224, 0x4e487b71))\n        mstore(4, 0x21)\n        revert(0, 0x24)\n    }\n    function abi_encode_enum_Role(value, pos)\n    {\n        if iszero(lt(value, 4))\n        {\n            mstore(0, shl(224, 0x4e487b71))\n            mstore(4, 0x21)\n            revert(0, 0x24)\n        }\n        mstore(pos, value)\n    }\n    function abi_encode_tuple_t_enum$_Role_$2010__to_t_uint8__fromStack_reversed(headStart, value0) -> tail\n    {\n        tail := add(headStart, 32)\n        abi_encode_enum_Role(value0, headStart)\n    }\n    function abi_encode_string(value, pos) -> end\n    {\n        let length := mload(value)\n        mstore(pos, length)\n        let i := 0\n        for { } lt(i, length) { i := add(i, 0x20) }\n        {\n            let _1 := 0x20\n            mstore(add(add(pos, i), _1), mload(add(add(value, i), _1)))\n        }\n        mstore(add(add(pos, length), 0x20), 0)\n        end := add(add(pos, and(add(length, 31), not(31))), 0x20)\n    }\n    function abi_encode_tuple_t_string_memory_ptr__to_t_string_memory_ptr__fromStack_reversed(headStart, value0) -> tail\n    {\n        mstore(headStart, 32)\n        tail := abi_encode_string(value0, add(headStart, 32))\n    }\n    function panic_error_0x41()\n    {\n        mstore(0, shl(224, 0x4e487b71))\n        mstore(4, 0x41)\n        revert(0, 0x24)\n    }\n    function abi_decode_string(offset, end) -> array\n    {\n        if iszero(slt(add(offset, 0x1f), end)) { revert(0, 0) }\n        let _1 := calldataload(offset)\n        let _2 := 0xffffffffffffffff\n        if gt(_1, _2) { panic_error_0x41() }\n        let _3 := not(31)\n        let memPtr := mload(64)\n        let newFreePtr := add(memPtr, and(add(and(add(_1, 0x1f), _3), 63), _3))\n        if or(gt(newFreePtr, _2), lt(newFreePtr, memPtr)) { panic_error_0x41() }\n        mstore(64, newFreePtr)\n        mstore(memPtr, _1)\n        if gt(add(add(offset, _1), 0x20), end) { revert(0, 0) }\n        calldatacopy(add(memPtr, 0x20), add(offset, 0x20), _1)\n        mstore(add(add(memPtr, _1), 0x20), 0)\n        array := memPtr\n    }\n    function abi_decode_tuple_t_addresst_string_memory_ptr(headStart, dataEnd) -> value0, value1\n    {\n        if slt(sub(dataEnd, headStart), 64) { revert(0, 0) }\n        value0 := abi_decode_address(headStart)\n        let offset := calldataload(add(headStart, 32))\n        if gt(offset, 0xffffffffffffffff) { revert(0, 0) }\n        value1 := abi_decode_string(add(headStart, offset), dataEnd)\n    }\n    function abi_decode_tuple_t_enum$_Role_$2010t_string_memory_ptr(headStart, dataEnd) -> value0, value1\n    {\n        if slt(sub(dataEnd, headStart), 64) { revert(0, 0) }\n        let value := calldataload(headStart)\n        if iszero(lt(value, 4)) { revert(0, 0) }\n        value0 := value\n        let offset := calldataload(add(headStart, 32))\n        if gt(offset, 0xffffffffffffffff) { revert(0, 0) }\n        value1 := abi_decode_string(add(headStart, offset), dataEnd)\n    }\n    function abi_encode_tuple_t_address__to_t_address__fromStack_reversed(headStart, value0) -> tail\n    {\n        tail := add(headStart, 32)\n        mstore(headStart, and(value0, sub(shl(160, 1), 1)))\n    }\n    function extract_byte_array_length(data) -> length\n    {\n        length := shr(1, data)\n        let outOfPlaceEncoding := and(data, 1)\n        if iszero(outOfPlaceEncoding) { length := and(length, 0x7f) }\n        if eq(outOfPlaceEncoding, lt(length, 32))\n        {\n            mstore(0, shl(224, 0x4e487b71))\n            mstore(4, 0x22)\n            revert(0, 0x24)\n        }\n    }\n    function abi_encode_tuple_t_stringliteral_eaa6121012bd1d6a2890c6ab893a0743a3947e743ad09ec3bada1e8cc7c35b51__to_t_string_memory_ptr__fromStack_reversed(headStart) -> tail\n    {\n        mstore(headStart, 32)\n        mstore(add(headStart, 32), 32)\n        mstore(add(headStart, 64), \"Only admin can add another admin\")\n        tail := add(headStart, 96)\n    }\n    function abi_encode_tuple_t_stringliteral_a08d66f010282343c63a2adfb2fb2eae7af36c2d0e7cd9b2008665789fb65b40__to_t_string_memory_ptr__fromStack_reversed(headStart) -> tail\n    {\n        mstore(headStart, 32)\n        mstore(add(headStart, 32), 23)\n        mstore(add(headStart, 64), \"User already registered\")\n        tail := add(headStart, 96)\n    }\n    function abi_encode_tuple_t_stringliteral_e64a28d6307a7145b495544047d6dd58370f8e8eaba180f3f161cc4a5b3b551c__to_t_string_memory_ptr__fromStack_reversed(headStart) -> tail\n    {\n        mstore(headStart, 32)\n        mstore(add(headStart, 32), 16)\n        mstore(add(headStart, 64), \"Name is required\")\n        tail := add(headStart, 96)\n    }\n    function array_dataslot_string_storage(ptr) -> data\n    {\n        mstore(0, ptr)\n        data := keccak256(0, 0x20)\n    }\n    function clean_up_bytearray_end_slots_string_storage(array, len, startIndex)\n    {\n        if gt(len, 31)\n        {\n            let _1 := 0\n            mstore(_1, array)\n            let data := keccak256(_1, 0x20)\n            let deleteStart := add(data, shr(5, add(startIndex, 31)))\n            if lt(startIndex, 0x20) { deleteStart := data }\n            let _2 := add(data, shr(5, add(len, 31)))\n            let start := deleteStart\n            for { } lt(start, _2) { start := add(start, 1) }\n            { sstore(start, _1) }\n        }\n    }\n    function extract_used_part_and_set_length_of_short_byte_array(data, len) -> used\n    {\n        used := or(and(data, not(shr(shl(3, len), not(0)))), shl(1, len))\n    }\n    function copy_byte_array_to_storage_from_t_string_memory_ptr_to_t_string_storage(slot, src)\n    {\n        let newLen := mload(src)\n        if gt(newLen, 0xffffffffffffffff) { panic_error_0x41() }\n        clean_up_bytearray_end_slots_string_storage(slot, extract_byte_array_length(sload(slot)), newLen)\n        let srcOffset := 0\n        let srcOffset_1 := 0x20\n        srcOffset := srcOffset_1\n        switch gt(newLen, 31)\n        case 1 {\n            let loopEnd := and(newLen, not(31))\n            let dstPtr := array_dataslot_string_storage(slot)\n            let i := 0\n            for { } lt(i, loopEnd) { i := add(i, srcOffset_1) }\n            {\n                sstore(dstPtr, mload(add(src, srcOffset)))\n                dstPtr := add(dstPtr, 1)\n                srcOffset := add(srcOffset, srcOffset_1)\n            }\n            if lt(loopEnd, newLen)\n            {\n                let lastValue := mload(add(src, srcOffset))\n                sstore(dstPtr, and(lastValue, not(shr(and(shl(3, newLen), 248), not(0)))))\n            }\n            sstore(slot, add(shl(1, newLen), 1))\n        }\n        default {\n            let value := 0\n            if newLen\n            {\n                value := mload(add(src, srcOffset))\n            }\n            sstore(slot, extract_used_part_and_set_length_of_short_byte_array(value, newLen))\n        }\n    }\n    function abi_encode_tuple_t_enum$_Role_$2010_t_string_memory_ptr_t_uint256__to_t_uint8_t_string_memory_ptr_t_uint256__fromStack_reversed(headStart, value2, value1, value0) -> tail\n    {\n        abi_encode_enum_Role(value0, headStart)\n        mstore(add(headStart, 32), 96)\n        tail := abi_encode_string(value1, add(headStart, 96))\n        mstore(add(headStart, 64), value2)\n    }\n    function abi_encode_tuple_t_stringliteral_bfd2107e0248bb83847cb562cee1853a3ab1d6009298682deaefc60611a84797__to_t_string_memory_ptr__fromStack_reversed(headStart) -> tail\n    {\n        mstore(headStart, 32)\n        mstore(add(headStart, 32), 39)\n        mstore(add(headStart, 64), \"Can only register as Shipper or \")\n        mstore(add(headStart, 96), \"Carrier\")\n        tail := add(headStart, 128)\n    }\n}",
       "id": 8,
       "language": "Yul",
       "name": "#utility.yul"
@@ -8849,15 +8849,15 @@
     "absolutePath": "project:/contracts/UserRegistry.sol",
     "exportedSymbols": {
       "UserRegistry": [
-        2239
+        2241
       ]
     },
-    "id": 2240,
+    "id": 2242,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2003,
+        "id": 2005,
         "literals": [
           "solidity",
           "^",
@@ -8874,9 +8874,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 2239,
+        "id": 2241,
         "linearizedBaseContracts": [
-          2239
+          2241
         ],
         "name": "UserRegistry",
         "nameLocation": "70:12:7",
@@ -8884,31 +8884,31 @@
         "nodes": [
           {
             "canonicalName": "UserRegistry.Role",
-            "id": 2008,
+            "id": 2010,
             "members": [
               {
-                "id": 2004,
+                "id": 2006,
                 "name": "None",
                 "nameLocation": "113:4:7",
                 "nodeType": "EnumValue",
                 "src": "113:4:7"
               },
               {
-                "id": 2005,
+                "id": 2007,
                 "name": "Shipper",
                 "nameLocation": "128:7:7",
                 "nodeType": "EnumValue",
                 "src": "128:7:7"
               },
               {
-                "id": 2006,
+                "id": 2008,
                 "name": "Carrier",
                 "nameLocation": "146:7:7",
                 "nodeType": "EnumValue",
                 "src": "146:7:7"
               },
               {
-                "id": 2007,
+                "id": 2009,
                 "name": "Admin",
                 "nameLocation": "164:5:7",
                 "nodeType": "EnumValue",
@@ -8923,25 +8923,25 @@
           {
             "constant": false,
             "functionSelector": "74d5e100",
-            "id": 2013,
+            "id": 2015,
             "mutability": "mutable",
             "name": "userRoles",
             "nameLocation": "216:9:7",
             "nodeType": "VariableDeclaration",
-            "scope": 2239,
+            "scope": 2241,
             "src": "184:41:7",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2008_$",
+              "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2010_$",
               "typeString": "mapping(address => enum UserRegistry.Role)"
             },
             "typeName": {
-              "id": 2012,
+              "id": 2014,
               "keyName": "",
               "keyNameLocation": "-1:-1:-1",
               "keyType": {
-                "id": 2009,
+                "id": 2011,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "192:7:7",
@@ -8953,28 +8953,28 @@
               "nodeType": "Mapping",
               "src": "184:24:7",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2008_$",
+                "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2010_$",
                 "typeString": "mapping(address => enum UserRegistry.Role)"
               },
               "valueName": "",
               "valueNameLocation": "-1:-1:-1",
               "valueType": {
-                "id": 2011,
+                "id": 2013,
                 "nodeType": "UserDefinedTypeName",
                 "pathNode": {
-                  "id": 2010,
+                  "id": 2012,
                   "name": "Role",
                   "nameLocations": [
                     "203:4:7"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 2008,
+                  "referencedDeclaration": 2010,
                   "src": "203:4:7"
                 },
-                "referencedDeclaration": 2008,
+                "referencedDeclaration": 2010,
                 "src": "203:4:7",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_Role_$2008",
+                  "typeIdentifier": "t_enum$_Role_$2010",
                   "typeString": "enum UserRegistry.Role"
                 }
               }
@@ -8984,12 +8984,12 @@
           {
             "constant": false,
             "functionSelector": "0e50cee5",
-            "id": 2017,
+            "id": 2019,
             "mutability": "mutable",
             "name": "registeredUsers",
             "nameLocation": "264:15:7",
             "nodeType": "VariableDeclaration",
-            "scope": 2239,
+            "scope": 2241,
             "src": "232:47:7",
             "stateVariable": true,
             "storageLocation": "default",
@@ -8998,11 +8998,11 @@
               "typeString": "mapping(address => bool)"
             },
             "typeName": {
-              "id": 2016,
+              "id": 2018,
               "keyName": "",
               "keyNameLocation": "-1:-1:-1",
               "keyType": {
-                "id": 2014,
+                "id": 2016,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "240:7:7",
@@ -9020,7 +9020,7 @@
               "valueName": "",
               "valueNameLocation": "-1:-1:-1",
               "valueType": {
-                "id": 2015,
+                "id": 2017,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
                 "src": "251:4:7",
@@ -9035,12 +9035,12 @@
           {
             "constant": false,
             "functionSelector": "7f281635",
-            "id": 2021,
+            "id": 2023,
             "mutability": "mutable",
             "name": "userNames",
             "nameLocation": "320:9:7",
             "nodeType": "VariableDeclaration",
-            "scope": 2239,
+            "scope": 2241,
             "src": "286:43:7",
             "stateVariable": true,
             "storageLocation": "default",
@@ -9049,11 +9049,11 @@
               "typeString": "mapping(address => string)"
             },
             "typeName": {
-              "id": 2020,
+              "id": 2022,
               "keyName": "",
               "keyNameLocation": "-1:-1:-1",
               "keyType": {
-                "id": 2018,
+                "id": 2020,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "294:7:7",
@@ -9071,7 +9071,7 @@
               "valueName": "",
               "valueNameLocation": "-1:-1:-1",
               "valueType": {
-                "id": 2019,
+                "id": 2021,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
                 "src": "305:6:7",
@@ -9086,12 +9086,12 @@
           {
             "constant": false,
             "functionSelector": "f851a440",
-            "id": 2023,
+            "id": 2025,
             "mutability": "mutable",
             "name": "admin",
             "nameLocation": "350:5:7",
             "nodeType": "VariableDeclaration",
-            "scope": 2239,
+            "scope": 2241,
             "src": "335:20:7",
             "stateVariable": true,
             "storageLocation": "default",
@@ -9100,7 +9100,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 2022,
+              "id": 2024,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "335:7:7",
@@ -9115,23 +9115,23 @@
           {
             "anonymous": false,
             "eventSelector": "726667a5f20e9b31dc33e05c22e9c75635a2b28353c1e1758ef024205927f702",
-            "id": 2034,
+            "id": 2036,
             "name": "UserRegistered",
             "nameLocation": "370:14:7",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 2033,
+              "id": 2035,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2025,
+                  "id": 2027,
                   "indexed": true,
                   "mutability": "mutable",
                   "name": "user",
                   "nameLocation": "411:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2034,
+                  "scope": 2036,
                   "src": "395:20:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -9140,7 +9140,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2024,
+                    "id": 2026,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "395:7:7",
@@ -9154,37 +9154,37 @@
                 },
                 {
                   "constant": false,
-                  "id": 2028,
+                  "id": 2030,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "431:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2034,
+                  "scope": 2036,
                   "src": "426:9:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Role_$2008",
+                    "typeIdentifier": "t_enum$_Role_$2010",
                     "typeString": "enum UserRegistry.Role"
                   },
                   "typeName": {
-                    "id": 2027,
+                    "id": 2029,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2026,
+                      "id": 2028,
                       "name": "Role",
                       "nameLocations": [
                         "426:4:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2008,
+                      "referencedDeclaration": 2010,
                       "src": "426:4:7"
                     },
-                    "referencedDeclaration": 2008,
+                    "referencedDeclaration": 2010,
                     "src": "426:4:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Role_$2008",
+                      "typeIdentifier": "t_enum$_Role_$2010",
                       "typeString": "enum UserRegistry.Role"
                     }
                   },
@@ -9192,13 +9192,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2030,
+                  "id": 2032,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "name",
                   "nameLocation": "453:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2034,
+                  "scope": 2036,
                   "src": "446:11:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -9207,7 +9207,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2029,
+                    "id": 2031,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "446:6:7",
@@ -9220,13 +9220,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 2032,
+                  "id": 2034,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "timestamp",
                   "nameLocation": "476:9:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2034,
+                  "scope": 2036,
                   "src": "468:17:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -9235,7 +9235,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2031,
+                    "id": 2033,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "468:7:7",
@@ -9253,23 +9253,23 @@
           },
           {
             "body": {
-              "id": 2074,
+              "id": 2076,
               "nodeType": "Block",
               "src": "515:325:7",
               "statements": [
                 {
                   "expression": {
-                    "id": 2040,
+                    "id": 2042,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 2037,
+                      "id": 2039,
                       "name": "admin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2023,
+                      "referencedDeclaration": 2025,
                       "src": "525:5:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -9280,7 +9280,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "expression": {
-                        "id": 2038,
+                        "id": 2040,
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -9291,7 +9291,7 @@
                           "typeString": "msg"
                         }
                       },
-                      "id": 2039,
+                      "id": 2041,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -9311,34 +9311,34 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 2041,
+                  "id": 2043,
                   "nodeType": "ExpressionStatement",
                   "src": "525:18:7"
                 },
                 {
                   "expression": {
-                    "id": 2047,
+                    "id": 2049,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2042,
+                        "id": 2044,
                         "name": "registeredUsers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2017,
+                        "referencedDeclaration": 2019,
                         "src": "554:15:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 2045,
+                      "id": 2047,
                       "indexExpression": {
                         "expression": {
-                          "id": 2043,
+                          "id": 2045,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -9349,7 +9349,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 2044,
+                        "id": 2046,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -9378,7 +9378,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "74727565",
-                      "id": 2046,
+                      "id": 2048,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -9398,34 +9398,34 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 2048,
+                  "id": 2050,
                   "nodeType": "ExpressionStatement",
                   "src": "554:34:7"
                 },
                 {
                   "expression": {
-                    "id": 2055,
+                    "id": 2057,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2049,
+                        "id": 2051,
                         "name": "userRoles",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2013,
+                        "referencedDeclaration": 2015,
                         "src": "599:9:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2008_$",
+                          "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2010_$",
                           "typeString": "mapping(address => enum UserRegistry.Role)"
                         }
                       },
-                      "id": 2052,
+                      "id": 2054,
                       "indexExpression": {
                         "expression": {
-                          "id": 2050,
+                          "id": 2052,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -9436,7 +9436,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 2051,
+                        "id": 2053,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -9457,7 +9457,7 @@
                       "nodeType": "IndexAccess",
                       "src": "599:21:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Role_$2008",
+                        "typeIdentifier": "t_enum$_Role_$2010",
                         "typeString": "enum UserRegistry.Role"
                       }
                     },
@@ -9465,18 +9465,18 @@
                     "operator": "=",
                     "rightHandSide": {
                       "expression": {
-                        "id": 2053,
+                        "id": 2055,
                         "name": "Role",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2008,
+                        "referencedDeclaration": 2010,
                         "src": "623:4:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_Role_$2008_$",
+                          "typeIdentifier": "t_type$_t_enum$_Role_$2010_$",
                           "typeString": "type(enum UserRegistry.Role)"
                         }
                       },
-                      "id": 2054,
+                      "id": 2056,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -9484,47 +9484,47 @@
                       "memberLocation": "628:5:7",
                       "memberName": "Admin",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2007,
+                      "referencedDeclaration": 2009,
                       "src": "623:10:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Role_$2008",
+                        "typeIdentifier": "t_enum$_Role_$2010",
                         "typeString": "enum UserRegistry.Role"
                       }
                     },
                     "src": "599:34:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Role_$2008",
+                      "typeIdentifier": "t_enum$_Role_$2010",
                       "typeString": "enum UserRegistry.Role"
                     }
                   },
-                  "id": 2056,
+                  "id": 2058,
                   "nodeType": "ExpressionStatement",
                   "src": "599:34:7"
                 },
                 {
                   "expression": {
-                    "id": 2062,
+                    "id": 2064,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2057,
+                        "id": 2059,
                         "name": "userNames",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2021,
+                        "referencedDeclaration": 2023,
                         "src": "644:9:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_string_storage_$",
                           "typeString": "mapping(address => string storage ref)"
                         }
                       },
-                      "id": 2060,
+                      "id": 2062,
                       "indexExpression": {
                         "expression": {
-                          "id": 2058,
+                          "id": 2060,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -9535,7 +9535,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 2059,
+                        "id": 2061,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -9564,7 +9564,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "53757065722041646d696e",
-                      "id": 2061,
+                      "id": 2063,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -9584,7 +9584,7 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 2063,
+                  "id": 2065,
                   "nodeType": "ExpressionStatement",
                   "src": "644:37:7"
                 },
@@ -9593,7 +9593,7 @@
                     "arguments": [
                       {
                         "expression": {
-                          "id": 2065,
+                          "id": 2067,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -9604,7 +9604,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 2066,
+                        "id": 2068,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -9620,18 +9620,18 @@
                       },
                       {
                         "expression": {
-                          "id": 2067,
+                          "id": 2069,
                           "name": "Role",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2008,
+                          "referencedDeclaration": 2010,
                           "src": "753:4:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_enum$_Role_$2008_$",
+                            "typeIdentifier": "t_type$_t_enum$_Role_$2010_$",
                             "typeString": "type(enum UserRegistry.Role)"
                           }
                         },
-                        "id": 2068,
+                        "id": 2070,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -9639,16 +9639,16 @@
                         "memberLocation": "758:5:7",
                         "memberName": "Admin",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2007,
+                        "referencedDeclaration": 2009,
                         "src": "753:10:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_enum$_Role_$2008",
+                          "typeIdentifier": "t_enum$_Role_$2010",
                           "typeString": "enum UserRegistry.Role"
                         }
                       },
                       {
                         "hexValue": "53757065722041646d696e",
-                        "id": 2069,
+                        "id": 2071,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -9664,7 +9664,7 @@
                       },
                       {
                         "expression": {
-                          "id": 2070,
+                          "id": 2072,
                           "name": "block",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -9675,7 +9675,7 @@
                             "typeString": "block"
                           }
                         },
-                        "id": 2071,
+                        "id": 2073,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -9697,7 +9697,7 @@
                           "typeString": "address"
                         },
                         {
-                          "typeIdentifier": "t_enum$_Role_$2008",
+                          "typeIdentifier": "t_enum$_Role_$2010",
                           "typeString": "enum UserRegistry.Role"
                         },
                         {
@@ -9709,18 +9709,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 2064,
+                      "id": 2066,
                       "name": "UserRegistered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2034,
+                      "referencedDeclaration": 2036,
                       "src": "699:14:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_enum$_Role_$2008_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_enum$_Role_$2010_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
                         "typeString": "function (address,enum UserRegistry.Role,string memory,uint256)"
                       }
                     },
-                    "id": 2072,
+                    "id": 2074,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -9736,13 +9736,13 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2073,
+                  "id": 2075,
                   "nodeType": "EmitStatement",
                   "src": "694:138:7"
                 }
               ]
             },
-            "id": 2075,
+            "id": 2077,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -9750,18 +9750,18 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2035,
+              "id": 2037,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "512:2:7"
             },
             "returnParameters": {
-              "id": 2036,
+              "id": 2038,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "515:0:7"
             },
-            "scope": 2239,
+            "scope": 2241,
             "src": "501:339:7",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -9769,7 +9769,7 @@
           },
           {
             "body": {
-              "id": 2146,
+              "id": 2148,
               "nodeType": "Block",
               "src": "909:516:7",
               "statements": [
@@ -9777,7 +9777,7 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 2088,
+                        "id": 2090,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -9788,21 +9788,21 @@
                         "src": "928:28:7",
                         "subExpression": {
                           "baseExpression": {
-                            "id": 2084,
+                            "id": 2086,
                             "name": "registeredUsers",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2017,
+                            "referencedDeclaration": 2019,
                             "src": "929:15:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                               "typeString": "mapping(address => bool)"
                             }
                           },
-                          "id": 2087,
+                          "id": 2089,
                           "indexExpression": {
                             "expression": {
-                              "id": 2085,
+                              "id": 2087,
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
@@ -9813,7 +9813,7 @@
                                 "typeString": "msg"
                               }
                             },
-                            "id": 2086,
+                            "id": 2088,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -9845,7 +9845,7 @@
                       },
                       {
                         "hexValue": "5573657220616c72656164792072656769737465726564",
-                        "id": 2089,
+                        "id": 2091,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -9871,7 +9871,7 @@
                           "typeString": "literal_string \"User already registered\""
                         }
                       ],
-                      "id": 2083,
+                      "id": 2085,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -9885,7 +9885,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 2090,
+                    "id": 2092,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -9901,7 +9901,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2091,
+                  "id": 2093,
                   "nodeType": "ExpressionStatement",
                   "src": "920:64:7"
                 },
@@ -9913,30 +9913,30 @@
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
                         },
-                        "id": 2101,
+                        "id": 2103,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "commonType": {
-                            "typeIdentifier": "t_enum$_Role_$2008",
+                            "typeIdentifier": "t_enum$_Role_$2010",
                             "typeString": "enum UserRegistry.Role"
                           },
-                          "id": 2096,
+                          "id": 2098,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftExpression": {
-                            "id": 2093,
+                            "id": 2095,
                             "name": "role",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2078,
+                            "referencedDeclaration": 2080,
                             "src": "1003:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Role_$2008",
+                              "typeIdentifier": "t_enum$_Role_$2010",
                               "typeString": "enum UserRegistry.Role"
                             }
                           },
@@ -9944,18 +9944,18 @@
                           "operator": "==",
                           "rightExpression": {
                             "expression": {
-                              "id": 2094,
+                              "id": 2096,
                               "name": "Role",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 2008,
+                              "referencedDeclaration": 2010,
                               "src": "1011:4:7",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_enum$_Role_$2008_$",
+                                "typeIdentifier": "t_type$_t_enum$_Role_$2010_$",
                                 "typeString": "type(enum UserRegistry.Role)"
                               }
                             },
-                            "id": 2095,
+                            "id": 2097,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -9963,10 +9963,10 @@
                             "memberLocation": "1016:7:7",
                             "memberName": "Shipper",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2005,
+                            "referencedDeclaration": 2007,
                             "src": "1011:12:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Role_$2008",
+                              "typeIdentifier": "t_enum$_Role_$2010",
                               "typeString": "enum UserRegistry.Role"
                             }
                           },
@@ -9980,23 +9980,23 @@
                         "operator": "||",
                         "rightExpression": {
                           "commonType": {
-                            "typeIdentifier": "t_enum$_Role_$2008",
+                            "typeIdentifier": "t_enum$_Role_$2010",
                             "typeString": "enum UserRegistry.Role"
                           },
-                          "id": 2100,
+                          "id": 2102,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftExpression": {
-                            "id": 2097,
+                            "id": 2099,
                             "name": "role",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2078,
+                            "referencedDeclaration": 2080,
                             "src": "1027:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Role_$2008",
+                              "typeIdentifier": "t_enum$_Role_$2010",
                               "typeString": "enum UserRegistry.Role"
                             }
                           },
@@ -10004,18 +10004,18 @@
                           "operator": "==",
                           "rightExpression": {
                             "expression": {
-                              "id": 2098,
+                              "id": 2100,
                               "name": "Role",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 2008,
+                              "referencedDeclaration": 2010,
                               "src": "1035:4:7",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_enum$_Role_$2008_$",
+                                "typeIdentifier": "t_type$_t_enum$_Role_$2010_$",
                                 "typeString": "type(enum UserRegistry.Role)"
                               }
                             },
-                            "id": 2099,
+                            "id": 2101,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -10023,10 +10023,10 @@
                             "memberLocation": "1040:7:7",
                             "memberName": "Carrier",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2006,
+                            "referencedDeclaration": 2008,
                             "src": "1035:12:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_Role_$2008",
+                              "typeIdentifier": "t_enum$_Role_$2010",
                               "typeString": "enum UserRegistry.Role"
                             }
                           },
@@ -10044,7 +10044,7 @@
                       },
                       {
                         "hexValue": "43616e206f6e6c792072656769737465722061732053686970706572206f722043617272696572",
-                        "id": 2102,
+                        "id": 2104,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -10070,7 +10070,7 @@
                           "typeString": "literal_string \"Can only register as Shipper or Carrier\""
                         }
                       ],
-                      "id": 2092,
+                      "id": 2094,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -10084,7 +10084,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 2103,
+                    "id": 2105,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -10100,7 +10100,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2104,
+                  "id": 2106,
                   "nodeType": "ExpressionStatement",
                   "src": "995:96:7"
                 },
@@ -10112,7 +10112,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 2112,
+                        "id": 2114,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -10121,11 +10121,11 @@
                           "expression": {
                             "arguments": [
                               {
-                                "id": 2108,
+                                "id": 2110,
                                 "name": "_name",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 2080,
+                                "referencedDeclaration": 2082,
                                 "src": "1116:5:7",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_string_memory_ptr",
@@ -10140,7 +10140,7 @@
                                   "typeString": "string memory"
                                 }
                               ],
-                              "id": 2107,
+                              "id": 2109,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -10152,14 +10152,14 @@
                                 "typeString": "type(bytes storage pointer)"
                               },
                               "typeName": {
-                                "id": 2106,
+                                "id": 2108,
                                 "name": "bytes",
                                 "nodeType": "ElementaryTypeName",
                                 "src": "1110:5:7",
                                 "typeDescriptions": {}
                               }
                             },
-                            "id": 2109,
+                            "id": 2111,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -10175,7 +10175,7 @@
                               "typeString": "bytes memory"
                             }
                           },
-                          "id": 2110,
+                          "id": 2112,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -10193,7 +10193,7 @@
                         "operator": ">",
                         "rightExpression": {
                           "hexValue": "30",
-                          "id": 2111,
+                          "id": 2113,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -10215,7 +10215,7 @@
                       },
                       {
                         "hexValue": "4e616d65206973207265717569726564",
-                        "id": 2113,
+                        "id": 2115,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -10241,7 +10241,7 @@
                           "typeString": "literal_string \"Name is required\""
                         }
                       ],
-                      "id": 2105,
+                      "id": 2107,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -10255,7 +10255,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 2114,
+                    "id": 2116,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -10271,34 +10271,34 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2115,
+                  "id": 2117,
                   "nodeType": "ExpressionStatement",
                   "src": "1102:52:7"
                 },
                 {
                   "expression": {
-                    "id": 2121,
+                    "id": 2123,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2116,
+                        "id": 2118,
                         "name": "registeredUsers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2017,
+                        "referencedDeclaration": 2019,
                         "src": "1167:15:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 2119,
+                      "id": 2121,
                       "indexExpression": {
                         "expression": {
-                          "id": 2117,
+                          "id": 2119,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -10309,7 +10309,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 2118,
+                        "id": 2120,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -10338,7 +10338,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "74727565",
-                      "id": 2120,
+                      "id": 2122,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -10358,34 +10358,34 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 2122,
+                  "id": 2124,
                   "nodeType": "ExpressionStatement",
                   "src": "1167:34:7"
                 },
                 {
                   "expression": {
-                    "id": 2128,
+                    "id": 2130,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2123,
+                        "id": 2125,
                         "name": "userRoles",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2013,
+                        "referencedDeclaration": 2015,
                         "src": "1212:9:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2008_$",
+                          "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2010_$",
                           "typeString": "mapping(address => enum UserRegistry.Role)"
                         }
                       },
-                      "id": 2126,
+                      "id": 2128,
                       "indexExpression": {
                         "expression": {
-                          "id": 2124,
+                          "id": 2126,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -10396,7 +10396,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 2125,
+                        "id": 2127,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -10417,58 +10417,58 @@
                       "nodeType": "IndexAccess",
                       "src": "1212:21:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Role_$2008",
+                        "typeIdentifier": "t_enum$_Role_$2010",
                         "typeString": "enum UserRegistry.Role"
                       }
                     },
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 2127,
+                      "id": 2129,
                       "name": "role",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2078,
+                      "referencedDeclaration": 2080,
                       "src": "1236:4:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Role_$2008",
+                        "typeIdentifier": "t_enum$_Role_$2010",
                         "typeString": "enum UserRegistry.Role"
                       }
                     },
                     "src": "1212:28:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Role_$2008",
+                      "typeIdentifier": "t_enum$_Role_$2010",
                       "typeString": "enum UserRegistry.Role"
                     }
                   },
-                  "id": 2129,
+                  "id": 2131,
                   "nodeType": "ExpressionStatement",
                   "src": "1212:28:7"
                 },
                 {
                   "expression": {
-                    "id": 2135,
+                    "id": 2137,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2130,
+                        "id": 2132,
                         "name": "userNames",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2021,
+                        "referencedDeclaration": 2023,
                         "src": "1251:9:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_string_storage_$",
                           "typeString": "mapping(address => string storage ref)"
                         }
                       },
-                      "id": 2133,
+                      "id": 2135,
                       "indexExpression": {
                         "expression": {
-                          "id": 2131,
+                          "id": 2133,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -10479,7 +10479,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 2132,
+                        "id": 2134,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -10507,11 +10507,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 2134,
+                      "id": 2136,
                       "name": "_name",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2080,
+                      "referencedDeclaration": 2082,
                       "src": "1275:5:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -10524,7 +10524,7 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 2136,
+                  "id": 2138,
                   "nodeType": "ExpressionStatement",
                   "src": "1251:29:7"
                 },
@@ -10533,7 +10533,7 @@
                     "arguments": [
                       {
                         "expression": {
-                          "id": 2138,
+                          "id": 2140,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -10544,7 +10544,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 2139,
+                        "id": 2141,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -10559,23 +10559,23 @@
                         }
                       },
                       {
-                        "id": 2140,
+                        "id": 2142,
                         "name": "role",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2078,
+                        "referencedDeclaration": 2080,
                         "src": "1352:4:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_enum$_Role_$2008",
+                          "typeIdentifier": "t_enum$_Role_$2010",
                           "typeString": "enum UserRegistry.Role"
                         }
                       },
                       {
-                        "id": 2141,
+                        "id": 2143,
                         "name": "_name",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2080,
+                        "referencedDeclaration": 2082,
                         "src": "1371:5:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -10584,7 +10584,7 @@
                       },
                       {
                         "expression": {
-                          "id": 2142,
+                          "id": 2144,
                           "name": "block",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -10595,7 +10595,7 @@
                             "typeString": "block"
                           }
                         },
-                        "id": 2143,
+                        "id": 2145,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -10617,7 +10617,7 @@
                           "typeString": "address"
                         },
                         {
-                          "typeIdentifier": "t_enum$_Role_$2008",
+                          "typeIdentifier": "t_enum$_Role_$2010",
                           "typeString": "enum UserRegistry.Role"
                         },
                         {
@@ -10629,18 +10629,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 2137,
+                      "id": 2139,
                       "name": "UserRegistered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2034,
+                      "referencedDeclaration": 2036,
                       "src": "1298:14:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_enum$_Role_$2008_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_enum$_Role_$2010_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
                         "typeString": "function (address,enum UserRegistry.Role,string memory,uint256)"
                       }
                     },
-                    "id": 2144,
+                    "id": 2146,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -10656,14 +10656,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2145,
+                  "id": 2147,
                   "nodeType": "EmitStatement",
                   "src": "1293:124:7"
                 }
               ]
             },
             "functionSelector": "d29bcc5c",
-            "id": 2147,
+            "id": 2149,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -10671,41 +10671,41 @@
             "nameLocation": "857:12:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2081,
+              "id": 2083,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2078,
+                  "id": 2080,
                   "mutability": "mutable",
                   "name": "role",
                   "nameLocation": "875:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2147,
+                  "scope": 2149,
                   "src": "870:9:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Role_$2008",
+                    "typeIdentifier": "t_enum$_Role_$2010",
                     "typeString": "enum UserRegistry.Role"
                   },
                   "typeName": {
-                    "id": 2077,
+                    "id": 2079,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2076,
+                      "id": 2078,
                       "name": "Role",
                       "nameLocations": [
                         "870:4:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2008,
+                      "referencedDeclaration": 2010,
                       "src": "870:4:7"
                     },
-                    "referencedDeclaration": 2008,
+                    "referencedDeclaration": 2010,
                     "src": "870:4:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Role_$2008",
+                      "typeIdentifier": "t_enum$_Role_$2010",
                       "typeString": "enum UserRegistry.Role"
                     }
                   },
@@ -10713,12 +10713,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 2080,
+                  "id": 2082,
                   "mutability": "mutable",
                   "name": "_name",
                   "nameLocation": "895:5:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2147,
+                  "scope": 2149,
                   "src": "881:19:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -10727,7 +10727,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2079,
+                    "id": 2081,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "881:6:7",
@@ -10742,12 +10742,12 @@
               "src": "869:32:7"
             },
             "returnParameters": {
-              "id": 2082,
+              "id": 2084,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "909:0:7"
             },
-            "scope": 2239,
+            "scope": 2241,
             "src": "848:577:7",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -10755,7 +10755,7 @@
           },
           {
             "body": {
-              "id": 2212,
+              "id": 2214,
               "nodeType": "Block",
               "src": "1498:507:7",
               "statements": [
@@ -10764,31 +10764,31 @@
                     "arguments": [
                       {
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Role_$2008",
+                          "typeIdentifier": "t_enum$_Role_$2010",
                           "typeString": "enum UserRegistry.Role"
                         },
-                        "id": 2161,
+                        "id": 2163,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "baseExpression": {
-                            "id": 2155,
+                            "id": 2157,
                             "name": "userRoles",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2013,
+                            "referencedDeclaration": 2015,
                             "src": "1517:9:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2008_$",
+                              "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2010_$",
                               "typeString": "mapping(address => enum UserRegistry.Role)"
                             }
                           },
-                          "id": 2158,
+                          "id": 2160,
                           "indexExpression": {
                             "expression": {
-                              "id": 2156,
+                              "id": 2158,
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
@@ -10799,7 +10799,7 @@
                                 "typeString": "msg"
                               }
                             },
-                            "id": 2157,
+                            "id": 2159,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -10820,7 +10820,7 @@
                           "nodeType": "IndexAccess",
                           "src": "1517:21:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Role_$2008",
+                            "typeIdentifier": "t_enum$_Role_$2010",
                             "typeString": "enum UserRegistry.Role"
                           }
                         },
@@ -10828,18 +10828,18 @@
                         "operator": "==",
                         "rightExpression": {
                           "expression": {
-                            "id": 2159,
+                            "id": 2161,
                             "name": "Role",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2008,
+                            "referencedDeclaration": 2010,
                             "src": "1542:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Role_$2008_$",
+                              "typeIdentifier": "t_type$_t_enum$_Role_$2010_$",
                               "typeString": "type(enum UserRegistry.Role)"
                             }
                           },
-                          "id": 2160,
+                          "id": 2162,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -10847,10 +10847,10 @@
                           "memberLocation": "1547:5:7",
                           "memberName": "Admin",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 2007,
+                          "referencedDeclaration": 2009,
                           "src": "1542:10:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Role_$2008",
+                            "typeIdentifier": "t_enum$_Role_$2010",
                             "typeString": "enum UserRegistry.Role"
                           }
                         },
@@ -10862,7 +10862,7 @@
                       },
                       {
                         "hexValue": "4f6e6c792061646d696e2063616e2061646420616e6f746865722061646d696e",
-                        "id": 2162,
+                        "id": 2164,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -10888,7 +10888,7 @@
                           "typeString": "literal_string \"Only admin can add another admin\""
                         }
                       ],
-                      "id": 2154,
+                      "id": 2156,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -10902,7 +10902,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 2163,
+                    "id": 2165,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -10918,7 +10918,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2164,
+                  "id": 2166,
                   "nodeType": "ExpressionStatement",
                   "src": "1509:80:7"
                 },
@@ -10926,7 +10926,7 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 2169,
+                        "id": 2171,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -10937,24 +10937,24 @@
                         "src": "1608:27:7",
                         "subExpression": {
                           "baseExpression": {
-                            "id": 2166,
+                            "id": 2168,
                             "name": "registeredUsers",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2017,
+                            "referencedDeclaration": 2019,
                             "src": "1609:15:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                               "typeString": "mapping(address => bool)"
                             }
                           },
-                          "id": 2168,
+                          "id": 2170,
                           "indexExpression": {
-                            "id": 2167,
+                            "id": 2169,
                             "name": "_newAdmin",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 2149,
+                            "referencedDeclaration": 2151,
                             "src": "1625:9:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -10979,7 +10979,7 @@
                       },
                       {
                         "hexValue": "5573657220616c72656164792072656769737465726564",
-                        "id": 2170,
+                        "id": 2172,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -11005,7 +11005,7 @@
                           "typeString": "literal_string \"User already registered\""
                         }
                       ],
-                      "id": 2165,
+                      "id": 2167,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -11019,7 +11019,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 2171,
+                    "id": 2173,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -11035,7 +11035,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2172,
+                  "id": 2174,
                   "nodeType": "ExpressionStatement",
                   "src": "1600:63:7"
                 },
@@ -11047,7 +11047,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 2180,
+                        "id": 2182,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -11056,11 +11056,11 @@
                           "expression": {
                             "arguments": [
                               {
-                                "id": 2176,
+                                "id": 2178,
                                 "name": "_name",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 2151,
+                                "referencedDeclaration": 2153,
                                 "src": "1688:5:7",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_string_memory_ptr",
@@ -11075,7 +11075,7 @@
                                   "typeString": "string memory"
                                 }
                               ],
-                              "id": 2175,
+                              "id": 2177,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -11087,14 +11087,14 @@
                                 "typeString": "type(bytes storage pointer)"
                               },
                               "typeName": {
-                                "id": 2174,
+                                "id": 2176,
                                 "name": "bytes",
                                 "nodeType": "ElementaryTypeName",
                                 "src": "1682:5:7",
                                 "typeDescriptions": {}
                               }
                             },
-                            "id": 2177,
+                            "id": 2179,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -11110,7 +11110,7 @@
                               "typeString": "bytes memory"
                             }
                           },
-                          "id": 2178,
+                          "id": 2180,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -11128,7 +11128,7 @@
                         "operator": ">",
                         "rightExpression": {
                           "hexValue": "30",
-                          "id": 2179,
+                          "id": 2181,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -11150,7 +11150,7 @@
                       },
                       {
                         "hexValue": "4e616d65206973207265717569726564",
-                        "id": 2181,
+                        "id": 2183,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -11176,7 +11176,7 @@
                           "typeString": "literal_string \"Name is required\""
                         }
                       ],
-                      "id": 2173,
+                      "id": 2175,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -11190,7 +11190,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 2182,
+                    "id": 2184,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -11206,37 +11206,37 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2183,
+                  "id": 2185,
                   "nodeType": "ExpressionStatement",
                   "src": "1674:52:7"
                 },
                 {
                   "expression": {
-                    "id": 2188,
+                    "id": 2190,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2184,
+                        "id": 2186,
                         "name": "registeredUsers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2017,
+                        "referencedDeclaration": 2019,
                         "src": "1739:15:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 2186,
+                      "id": 2188,
                       "indexExpression": {
-                        "id": 2185,
+                        "id": 2187,
                         "name": "_newAdmin",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2149,
+                        "referencedDeclaration": 2151,
                         "src": "1755:9:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -11258,7 +11258,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "74727565",
-                      "id": 2187,
+                      "id": 2189,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -11278,37 +11278,37 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 2189,
+                  "id": 2191,
                   "nodeType": "ExpressionStatement",
                   "src": "1739:33:7"
                 },
                 {
                   "expression": {
-                    "id": 2195,
+                    "id": 2197,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2190,
+                        "id": 2192,
                         "name": "userRoles",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2013,
+                        "referencedDeclaration": 2015,
                         "src": "1783:9:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2008_$",
+                          "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2010_$",
                           "typeString": "mapping(address => enum UserRegistry.Role)"
                         }
                       },
-                      "id": 2192,
+                      "id": 2194,
                       "indexExpression": {
-                        "id": 2191,
+                        "id": 2193,
                         "name": "_newAdmin",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2149,
+                        "referencedDeclaration": 2151,
                         "src": "1793:9:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -11322,7 +11322,7 @@
                       "nodeType": "IndexAccess",
                       "src": "1783:20:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Role_$2008",
+                        "typeIdentifier": "t_enum$_Role_$2010",
                         "typeString": "enum UserRegistry.Role"
                       }
                     },
@@ -11330,18 +11330,18 @@
                     "operator": "=",
                     "rightHandSide": {
                       "expression": {
-                        "id": 2193,
+                        "id": 2195,
                         "name": "Role",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2008,
+                        "referencedDeclaration": 2010,
                         "src": "1806:4:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_Role_$2008_$",
+                          "typeIdentifier": "t_type$_t_enum$_Role_$2010_$",
                           "typeString": "type(enum UserRegistry.Role)"
                         }
                       },
-                      "id": 2194,
+                      "id": 2196,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -11349,50 +11349,50 @@
                       "memberLocation": "1811:5:7",
                       "memberName": "Admin",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2007,
+                      "referencedDeclaration": 2009,
                       "src": "1806:10:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_Role_$2008",
+                        "typeIdentifier": "t_enum$_Role_$2010",
                         "typeString": "enum UserRegistry.Role"
                       }
                     },
                     "src": "1783:33:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Role_$2008",
+                      "typeIdentifier": "t_enum$_Role_$2010",
                       "typeString": "enum UserRegistry.Role"
                     }
                   },
-                  "id": 2196,
+                  "id": 2198,
                   "nodeType": "ExpressionStatement",
                   "src": "1783:33:7"
                 },
                 {
                   "expression": {
-                    "id": 2201,
+                    "id": 2203,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2197,
+                        "id": 2199,
                         "name": "userNames",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2021,
+                        "referencedDeclaration": 2023,
                         "src": "1827:9:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_string_storage_$",
                           "typeString": "mapping(address => string storage ref)"
                         }
                       },
-                      "id": 2199,
+                      "id": 2201,
                       "indexExpression": {
-                        "id": 2198,
+                        "id": 2200,
                         "name": "_newAdmin",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2149,
+                        "referencedDeclaration": 2151,
                         "src": "1837:9:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -11413,11 +11413,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 2200,
+                      "id": 2202,
                       "name": "_name",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2151,
+                      "referencedDeclaration": 2153,
                       "src": "1850:5:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -11430,7 +11430,7 @@
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 2202,
+                  "id": 2204,
                   "nodeType": "ExpressionStatement",
                   "src": "1827:28:7"
                 },
@@ -11438,11 +11438,11 @@
                   "eventCall": {
                     "arguments": [
                       {
-                        "id": 2204,
+                        "id": 2206,
                         "name": "_newAdmin",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2149,
+                        "referencedDeclaration": 2151,
                         "src": "1902:9:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -11451,18 +11451,18 @@
                       },
                       {
                         "expression": {
-                          "id": 2205,
+                          "id": 2207,
                           "name": "Role",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2008,
+                          "referencedDeclaration": 2010,
                           "src": "1926:4:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_enum$_Role_$2008_$",
+                            "typeIdentifier": "t_type$_t_enum$_Role_$2010_$",
                             "typeString": "type(enum UserRegistry.Role)"
                           }
                         },
-                        "id": 2206,
+                        "id": 2208,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -11470,19 +11470,19 @@
                         "memberLocation": "1931:5:7",
                         "memberName": "Admin",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 2007,
+                        "referencedDeclaration": 2009,
                         "src": "1926:10:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_enum$_Role_$2008",
+                          "typeIdentifier": "t_enum$_Role_$2010",
                           "typeString": "enum UserRegistry.Role"
                         }
                       },
                       {
-                        "id": 2207,
+                        "id": 2209,
                         "name": "_name",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2151,
+                        "referencedDeclaration": 2153,
                         "src": "1951:5:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -11491,7 +11491,7 @@
                       },
                       {
                         "expression": {
-                          "id": 2208,
+                          "id": 2210,
                           "name": "block",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -11502,7 +11502,7 @@
                             "typeString": "block"
                           }
                         },
-                        "id": 2209,
+                        "id": 2211,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -11524,7 +11524,7 @@
                           "typeString": "address"
                         },
                         {
-                          "typeIdentifier": "t_enum$_Role_$2008",
+                          "typeIdentifier": "t_enum$_Role_$2010",
                           "typeString": "enum UserRegistry.Role"
                         },
                         {
@@ -11536,18 +11536,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 2203,
+                      "id": 2205,
                       "name": "UserRegistered",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2034,
+                      "referencedDeclaration": 2036,
                       "src": "1873:14:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_enum$_Role_$2008_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_enum$_Role_$2010_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
                         "typeString": "function (address,enum UserRegistry.Role,string memory,uint256)"
                       }
                     },
-                    "id": 2210,
+                    "id": 2212,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -11563,14 +11563,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2211,
+                  "id": 2213,
                   "nodeType": "EmitStatement",
                   "src": "1868:129:7"
                 }
               ]
             },
             "functionSelector": "d16856ca",
-            "id": 2213,
+            "id": 2215,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -11578,17 +11578,17 @@
             "nameLocation": "1442:8:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2152,
+              "id": 2154,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2149,
+                  "id": 2151,
                   "mutability": "mutable",
                   "name": "_newAdmin",
                   "nameLocation": "1459:9:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2213,
+                  "scope": 2215,
                   "src": "1451:17:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -11597,7 +11597,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2148,
+                    "id": 2150,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1451:7:7",
@@ -11611,12 +11611,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 2151,
+                  "id": 2153,
                   "mutability": "mutable",
                   "name": "_name",
                   "nameLocation": "1484:5:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2213,
+                  "scope": 2215,
                   "src": "1470:19:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -11625,7 +11625,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2150,
+                    "id": 2152,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1470:6:7",
@@ -11640,12 +11640,12 @@
               "src": "1450:40:7"
             },
             "returnParameters": {
-              "id": 2153,
+              "id": 2155,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1498:0:7"
             },
-            "scope": 2239,
+            "scope": 2241,
             "src": "1433:572:7",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -11653,31 +11653,31 @@
           },
           {
             "body": {
-              "id": 2225,
+              "id": 2227,
               "nodeType": "Block",
               "src": "2076:42:7",
               "statements": [
                 {
                   "expression": {
                     "baseExpression": {
-                      "id": 2221,
+                      "id": 2223,
                       "name": "userRoles",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2013,
+                      "referencedDeclaration": 2015,
                       "src": "2094:9:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2008_$",
+                        "typeIdentifier": "t_mapping$_t_address_$_t_enum$_Role_$2010_$",
                         "typeString": "mapping(address => enum UserRegistry.Role)"
                       }
                     },
-                    "id": 2223,
+                    "id": 2225,
                     "indexExpression": {
-                      "id": 2222,
+                      "id": 2224,
                       "name": "_user",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2215,
+                      "referencedDeclaration": 2217,
                       "src": "2104:5:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -11691,19 +11691,19 @@
                     "nodeType": "IndexAccess",
                     "src": "2094:16:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Role_$2008",
+                      "typeIdentifier": "t_enum$_Role_$2010",
                       "typeString": "enum UserRegistry.Role"
                     }
                   },
-                  "functionReturnParameters": 2220,
-                  "id": 2224,
+                  "functionReturnParameters": 2222,
+                  "id": 2226,
                   "nodeType": "Return",
                   "src": "2087:23:7"
                 }
               ]
             },
             "functionSelector": "27820851",
-            "id": 2226,
+            "id": 2228,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -11711,17 +11711,17 @@
             "nameLocation": "2022:11:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2216,
+              "id": 2218,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2215,
+                  "id": 2217,
                   "mutability": "mutable",
                   "name": "_user",
                   "nameLocation": "2042:5:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2226,
+                  "scope": 2228,
                   "src": "2034:13:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -11730,7 +11730,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2214,
+                    "id": 2216,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2034:7:7",
@@ -11746,41 +11746,41 @@
               "src": "2033:15:7"
             },
             "returnParameters": {
-              "id": 2220,
+              "id": 2222,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2219,
+                  "id": 2221,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2226,
+                  "scope": 2228,
                   "src": "2070:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Role_$2008",
+                    "typeIdentifier": "t_enum$_Role_$2010",
                     "typeString": "enum UserRegistry.Role"
                   },
                   "typeName": {
-                    "id": 2218,
+                    "id": 2220,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2217,
+                      "id": 2219,
                       "name": "Role",
                       "nameLocations": [
                         "2070:4:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2008,
+                      "referencedDeclaration": 2010,
                       "src": "2070:4:7"
                     },
-                    "referencedDeclaration": 2008,
+                    "referencedDeclaration": 2010,
                     "src": "2070:4:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_Role_$2008",
+                      "typeIdentifier": "t_enum$_Role_$2010",
                       "typeString": "enum UserRegistry.Role"
                     }
                   },
@@ -11789,7 +11789,7 @@
               ],
               "src": "2069:6:7"
             },
-            "scope": 2239,
+            "scope": 2241,
             "src": "2013:105:7",
             "stateMutability": "view",
             "virtual": false,
@@ -11797,31 +11797,31 @@
           },
           {
             "body": {
-              "id": 2237,
+              "id": 2239,
               "nodeType": "Block",
               "src": "2190:48:7",
               "statements": [
                 {
                   "expression": {
                     "baseExpression": {
-                      "id": 2233,
+                      "id": 2235,
                       "name": "registeredUsers",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2017,
+                      "referencedDeclaration": 2019,
                       "src": "2208:15:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                         "typeString": "mapping(address => bool)"
                       }
                     },
-                    "id": 2235,
+                    "id": 2237,
                     "indexExpression": {
-                      "id": 2234,
+                      "id": 2236,
                       "name": "_user",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2228,
+                      "referencedDeclaration": 2230,
                       "src": "2224:5:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -11839,15 +11839,15 @@
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 2232,
-                  "id": 2236,
+                  "functionReturnParameters": 2234,
+                  "id": 2238,
                   "nodeType": "Return",
                   "src": "2201:29:7"
                 }
               ]
             },
             "functionSelector": "c3c5a547",
-            "id": 2238,
+            "id": 2240,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -11855,17 +11855,17 @@
             "nameLocation": "2135:12:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2229,
+              "id": 2231,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2228,
+                  "id": 2230,
                   "mutability": "mutable",
                   "name": "_user",
                   "nameLocation": "2156:5:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2238,
+                  "scope": 2240,
                   "src": "2148:13:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -11874,7 +11874,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2227,
+                    "id": 2229,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "2148:7:7",
@@ -11890,17 +11890,17 @@
               "src": "2147:15:7"
             },
             "returnParameters": {
-              "id": 2232,
+              "id": 2234,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2231,
+                  "id": 2233,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2238,
+                  "scope": 2240,
                   "src": "2184:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -11909,7 +11909,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 2230,
+                    "id": 2232,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "2184:4:7",
@@ -11923,18 +11923,18 @@
               ],
               "src": "2183:6:7"
             },
-            "scope": 2239,
+            "scope": 2241,
             "src": "2126:112:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 2240,
+        "scope": 2242,
         "src": "61:2180:7",
         "usedErrors": [],
         "usedEvents": [
-          2034
+          2036
         ]
       }
     ],
@@ -11984,14 +11984,46 @@
       "transactionHash": "0x229af4d02c468779bf428f2f67e3bbe220b1b5c5d7746684521622fe9ba9d2d7"
     },
     "11155111": {
-      "events": {},
+      "events": {
+        "0x726667a5f20e9b31dc33e05c22e9c75635a2b28353c1e1758ef024205927f702": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "enum UserRegistry.Role",
+              "name": "role",
+              "type": "uint8"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            }
+          ],
+          "name": "UserRegistered",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0xe29Ac9404EDA02D69951C38faa3a2B2d924ceB67",
-      "transactionHash": "0x737975e5bc61828f5886ec52b39c87e0553b9bb42fe1286f04037f40e0867f8c"
+      "address": "0xf8206210F9DBc486C88B65991fA8A06ebC1Faab7",
+      "transactionHash": "0xe172eb870efd8e5a691071affface1c5d10d9cd39442019da33d5005ddd0410e"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2026-09-04T07:23:38.688Z",
+  "updatedAt": "2026-09-05T13:14:02.681Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

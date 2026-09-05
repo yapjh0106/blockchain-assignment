@@ -33,6 +33,22 @@ function showToast(message, type = 'info') {
 
 // ==================== GLOBAL VARIABLES ====================
 let web3 = null;
+let ethUsdPrice = 0;
+
+async function fetchEthPrice() {
+    try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+        const data = await res.json();
+        if (data && data.ethereum && data.ethereum.usd) {
+            ethUsdPrice = parseFloat(data.ethereum.usd);
+            if (typeof updateDistributionPreview === 'function') {
+                updateDistributionPreview();
+            }
+        }
+    } catch (e) {
+        console.error('Failed to fetch ETH price', e);
+    }
+}
 let deploymentBlock = 0;
 let currentAccount = null;
 let currentRole = 0;
@@ -369,7 +385,7 @@ function showPage(pageName) {
     });
     hideGlobalStatus();
 
-    if (pageName === "agreements") loadAgreementList();
+    if (pageName === "dashboard" || pageName === "agreements") loadAgreementList();
     if (pageName === "history") loadRoleHistory();
     if (pageName === "reputation") loadReputationPage();
 
@@ -565,7 +581,7 @@ async function loadAgreementList() {
 
     const current = currentAccount.toLowerCase();
 
-    currentRoleAgreements = [];
+    const fetchedAgreements = [];
 
     for (let id = 1; id <= count; id++) {
         const agreement = await logisticsEscrow.methods
@@ -587,14 +603,16 @@ async function loadAgreementList() {
         }
 
         if (belongs) {
-            currentRoleAgreements.push(agreement);
+            fetchedAgreements.push(agreement);
         }
     }
 
+    currentRoleAgreements = fetchedAgreements;
     currentRoleAgreements.sort(
         (a, b) => Number(b.id) - Number(a.id)
     );
     renderAgreementList();
+    refreshDashboardStats();
 }
 
 // ==================== AGREEMENT LIST ====================
@@ -682,21 +700,26 @@ async function renderShipperDashboard() {
         const status = Number(agreement.status);
         const deadline = Number(agreement.deadline);
 
-        if (status === 0 || status === 1 || status === 2) active++;
-        if (status === 3) completed++;
-        
-        if (deadline < now && !bal.isZero() && status !== 3 &&
-                status !== 4 &&
-                status !== 5 && status !== 5) {
-            needsAttentionHTML += `
-                <tr>
-                    <td>#${agreement.id}</td>
-                    <td>${shortAddress(agreement.shipper)}</td>
-                    <td>${shortAddress(agreement.carrier)}</td>
-                    <td style="color: #e11d48; font-weight: 600;">${web3.utils.fromWei(bal.toString(), "ether")} ETH</td>
-                    <td><span class="status-badge" style="background: #fee2e2; color: #b91c1c;">Expired</span></td>
-                </tr>
-            `;
+        if (status === 3) {
+            completed++;
+        } else if (status === 4) {
+            // Refunded
+        } else if (status === 5) {
+            // Cancelled
+        } else if (deadline < now) {
+            if (!bal.isZero()) {
+                needsAttentionHTML += `
+                    <tr>
+                        <td>#${agreement.id}</td>
+                        <td>${shortAddress(agreement.shipper)}</td>
+                        <td>${shortAddress(agreement.carrier)}</td>
+                        <td style="color: #e11d48; font-weight: 600;">${web3.utils.fromWei(bal.toString(), "ether")} ETH</td>
+                        <td><span class="status-badge" style="background: #fee2e2; color: #b91c1c;">Expired</span></td>
+                    </tr>
+                `;
+            }
+        } else {
+            active++;
         }
 
         escrowTotal = escrowTotal.add(bal);
@@ -898,11 +921,21 @@ async function renderCarrierDashboard() {
     let completed = 0;
     let verified = 0;
 
+    const now = Math.floor(Date.now() / 1000);
+
     currentRoleAgreements.forEach(agreement => {
         const status = Number(agreement.status);
+        const deadline = Number(agreement.deadline);
 
-        if (status === 0 || status === 1 || status === 2) active++;
-        if (status === 3) completed++;
+        if (status === 3) {
+            completed++;
+        } else if (status === 4 || status === 5) {
+            // Refunded or Cancelled
+        } else if (deadline < now) {
+            // Expired
+        } else {
+            active++;
+        }
 
         if (Number(agreement.pickupStatus) === 2) verified++;
         if (Number(agreement.deliveryStatus) === 2) verified++;
@@ -1027,14 +1060,19 @@ function renderCarrierPendingVerifications() {
 
 // ==================== CREATE AGREEMENT PREVIEW ====================
 function updateDistributionPreview() {
-    const total =
-        Number(document.getElementById("totalAmount").value) || 0;
+    const total = Number(document.getElementById("totalAmount").value) || 0;
+    const pickup = Number(document.getElementById("pickupAmount").value) || 0;
+    const delivery = Number(document.getElementById("deliveryAmount").value) || 0;
 
-    const pickup =
-        Number(document.getElementById("pickupAmount").value) || 0;
-
-    const delivery =
-        Number(document.getElementById("deliveryAmount").value) || 0;
+    if (ethUsdPrice > 0) {
+        const tUsd = document.getElementById('totalAmountUsd');
+        const pUsd = document.getElementById('pickupAmountUsd');
+        const dUsd = document.getElementById('deliveryAmountUsd');
+        
+        if (total > 0) { tUsd.textContent = '~' + (total * ethUsdPrice).toFixed(2) + ' USD'; tUsd.style.display = 'block'; } else { tUsd.style.display = 'none'; }
+        if (pickup > 0) { pUsd.textContent = '~' + (pickup * ethUsdPrice).toFixed(2) + ' USD'; pUsd.style.display = 'block'; } else { pUsd.style.display = 'none'; }
+        if (delivery > 0) { dUsd.textContent = '~' + (delivery * ethUsdPrice).toFixed(2) + ' USD'; dUsd.style.display = 'block'; } else { dUsd.style.display = 'none'; }
+    }
 
     let pickupPercent = 0;
     let deliveryPercent = 0;
@@ -1061,16 +1099,6 @@ function updateDistributionPreview() {
 
     document.getElementById("createSummaryTotal").textContent =
         `${total} ETH`;
-
-    document.getElementById("pickupPercentageText").textContent =
-        total > 0
-            ? `Pickup milestone allocation (${pickupPercent.toFixed(0)}%).`
-            : "Pickup milestone allocation.";
-
-    document.getElementById("deliveryPercentageText").textContent =
-        total > 0
-            ? `Final Delivery allocation (${deliveryPercent.toFixed(0)}%).`
-            : "Final Delivery allocation.";
 
     const valid =
         total > 0 &&
@@ -2039,7 +2067,7 @@ function renderAgreementAction(agreement) {
                 <button
                     class="primary-button large-button full-width-button"
                     style="margin-top: 12px; background: linear-gradient(90deg, #d32f2f, #f44336);"
-                    onclick="openRejectModal('agreement')">
+                    onclick="openRejectModal('cancel_carrier')">
                     Cancel Agreement
                 </button>
             `;
@@ -3167,6 +3195,7 @@ document.addEventListener(
         setupEventListeners();
         setupMetaMaskListeners();
         setupFileAttachmentManagers();
+        fetchEthPrice();
         updateDistributionPreview();
     }
 );
@@ -3216,7 +3245,7 @@ async function confirmRejectAgreement() {
         showToast("Processing request...", "info");
 
         if (rejectActionType === 'agreement') {
-            await logisticsEscrow.methods.cancelAgreementByShipper(selectedAgreementId).send({ from: currentAccount });
+            await logisticsEscrow.methods.cancelAgreementByShipper(selectedAgreementId, comment).send({ from: currentAccount });
             showToast("Agreement cancelled successfully!", "success");
         } else if (rejectActionType === 'cancel_carrier') {
             await logisticsEscrow.methods.cancelAgreementByCarrier(selectedAgreementId, comment).send({ from: currentAccount });
