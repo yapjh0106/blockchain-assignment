@@ -932,12 +932,18 @@
 
                         <div class="detail-summary-row">
                             <span>Total Value</span>
-                            <strong id="detailPageTotal">-</strong>
+                            <div style="text-align: right;">
+                                <strong id="detailPageTotal">-</strong>
+                                <small id="detailPageTotalUsd" style="display: block; color: #2e7d32; font-weight: bold; margin-top: 2px;"></small>
+                            </div>
                         </div>
 
                         <div class="detail-summary-row">
                             <span>Escrow Balance</span>
-                            <strong id="detailPageEscrow">-</strong>
+                            <div style="text-align: right;">
+                                <strong id="detailPageEscrow">-</strong>
+                                <small id="detailPageEscrowUsd" style="display: block; color: #2e7d32; font-weight: bold; margin-top: 2px;"></small>
+                            </div>
                         </div>
 
                         <div class="detail-summary-row">
@@ -969,7 +975,10 @@
                                 <span>Shipment pickup milestone.</span>
                             </div>
 
-                            <strong id="detailPagePickupAmount">-</strong>
+                            <div style="text-align: right;">
+                                <strong id="detailPagePickupAmount">-</strong>
+                                <small id="detailPagePickupAmountUsd" style="display: block; color: #2e7d32; font-weight: bold; margin-top: 2px;"></small>
+                            </div>
 
                             <span id="detailPagePickupStatus"
                                   class="milestone-status pending">
@@ -985,7 +994,10 @@
                                 <span>Final shipment delivery.</span>
                             </div>
 
-                            <strong id="detailPageDeliveryAmount">-</strong>
+                            <div style="text-align: right;">
+                                <strong id="detailPageDeliveryAmount">-</strong>
+                                <small id="detailPageDeliveryAmountUsd" style="display: block; color: #2e7d32; font-weight: bold; margin-top: 2px;"></small>
+                            </div>
 
                             <span id="detailPageDeliveryStatus"
                                   class="milestone-status pending">
@@ -1566,7 +1578,7 @@
 
 <!-- Web3 and App Logic -->
 <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
-<script src="app.js?v=8"></script>
+<script src="app.js?v=10"></script>
 
 </body>
 </html>

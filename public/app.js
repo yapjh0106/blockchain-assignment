@@ -1756,17 +1756,13 @@ async function loadAgreementDetail(id, navigate = true) {
     document.getElementById("detailPageCarrier").textContent =
         agreement.carrier;
 
-    document.getElementById("detailPageTotal").textContent =
-        `${web3.utils.fromWei(
-            agreement.totalAmount.toString(),
-            "ether"
-        )} ETH`;
+    const tVal = web3.utils.fromWei(agreement.totalAmount.toString(), "ether");
+    document.getElementById("detailPageTotal").textContent = `${tVal} ETH`;
+    if (ethUsdPrice > 0) document.getElementById("detailPageTotalUsd").textContent = `~${(Number(tVal) * ethUsdPrice).toFixed(2)} USD`;
 
-    document.getElementById("detailPageEscrow").textContent =
-        `${web3.utils.fromWei(
-            agreement.escrowBalance.toString(),
-            "ether"
-        )} ETH`;
+    const eVal = web3.utils.fromWei(agreement.escrowBalance.toString(), "ether");
+    document.getElementById("detailPageEscrow").textContent = `${eVal} ETH`;
+    if (ethUsdPrice > 0) document.getElementById("detailPageEscrowUsd").textContent = `~${(Number(eVal) * ethUsdPrice).toFixed(2)} USD`;
 
     document.getElementById("detailPageDeadline").textContent =
         formatTimestamp(agreement.deadline);
@@ -1774,17 +1770,13 @@ async function loadAgreementDetail(id, navigate = true) {
     document.getElementById("detailPageCreated").textContent =
         formatTimestamp(agreement.createdAt);
 
-    document.getElementById("detailPagePickupAmount").textContent =
-        `${web3.utils.fromWei(
-            agreement.pickupAmount.toString(),
-            "ether"
-        )} ETH`;
+    const pVal = web3.utils.fromWei(agreement.pickupAmount.toString(), "ether");
+    document.getElementById("detailPagePickupAmount").textContent = `${pVal} ETH`;
+    if (ethUsdPrice > 0) document.getElementById("detailPagePickupAmountUsd").textContent = `~${(Number(pVal) * ethUsdPrice).toFixed(2)} USD`;
 
-    document.getElementById("detailPageDeliveryAmount").textContent =
-        `${web3.utils.fromWei(
-            agreement.deliveryAmount.toString(),
-            "ether"
-        )} ETH`;
+    const dVal = web3.utils.fromWei(agreement.deliveryAmount.toString(), "ether");
+    document.getElementById("detailPageDeliveryAmount").textContent = `${dVal} ETH`;
+    if (ethUsdPrice > 0) document.getElementById("detailPageDeliveryAmountUsd").textContent = `~${(Number(dVal) * ethUsdPrice).toFixed(2)} USD`;
 
     setMilestoneStatusElement(
         "detailPagePickupStatus",
