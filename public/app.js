@@ -294,7 +294,32 @@ function getReadableError(error) {
     return message;
 }
 
-// ==================== CONTRACT LOADING ====================
+async function fetchEventsInBatches(contract, eventName, filter, fromBlock, toBlockStr) {
+    let latestBlock = await web3.eth.getBlockNumber();
+    let toBlock = toBlockStr === 'latest' ? latestBlock : Number(toBlockStr);
+    let startBlock = Number(fromBlock);
+    
+    if (startBlock > toBlock) return [];
+
+    const MAX_RANGE = 5000;
+    const allEvents = [];
+    
+    while (startBlock <= toBlock) {
+        let endBlock = startBlock + MAX_RANGE;
+        if (endBlock > toBlock) endBlock = toBlock;
+        
+        const events = await contract.getPastEvents(eventName, {
+            filter: filter,
+            fromBlock: startBlock,
+            toBlock: endBlock
+        });
+        allEvents.push(...events);
+        
+        startBlock = endBlock + 1;
+    }
+    
+    return allEvents;
+}// ==================== CONTRACT LOADING ====================
 async function loadContract(path) {
     const response = await fetch(`${path}?t=${new Date().getTime()}`);
 
@@ -867,13 +892,7 @@ async function renderShipperRecentActivity() {
         )
     );
 
-    const events = await logisticsEscrow.getPastEvents(
-        "allEvents",
-        {
-            fromBlock: deploymentBlock,
-            toBlock: "latest"
-        }
-    );
+    const events = await fetchEventsInBatches(logisticsEscrow, 'allEvents', undefined, deploymentBlock, 'latest');
 
     const relevant = events
         .filter(event =>
@@ -1799,8 +1818,8 @@ async function loadAgreementDetail(id, navigate = true) {
     
     if (statusNumber === 4 || statusNumber === 5 || pStatus === 2 || dStatus === 2) {
         try {
-            const cancelEvents = await logisticsEscrow.getPastEvents('AgreementCancelled', { filter: { id: id }, fromBlock: deploymentBlock, toBlock: 'latest' });
-            const milestoneRejectEvents = await logisticsEscrow.getPastEvents('MilestoneRejected', { filter: { id: id }, fromBlock: deploymentBlock, toBlock: 'latest' });
+            const cancelEvents = await fetchEventsInBatches(logisticsEscrow, 'AgreementCancelled', { id: id }, deploymentBlock, 'latest');
+            const milestoneRejectEvents = await fetchEventsInBatches(logisticsEscrow, 'MilestoneRejected', { id: id }, deploymentBlock, 'latest');
             
             const allEvents = [...cancelEvents, ...milestoneRejectEvents].sort((a, b) => b.blockNumber - a.blockNumber);
             if (allEvents.length > 0 && rejectBox) {
@@ -2485,7 +2504,7 @@ async function viewReputation() {
     try {
         showToast("Loading carriers...", "info");
         
-        const events = await userRegistry.getPastEvents("UserRegistered", { fromBlock: deploymentBlock, toBlock: "latest" });
+        const events = await fetchEventsInBatches(userRegistry, 'UserRegistered', undefined, deploymentBlock, 'latest');
         const carriersList = events.filter(e => Number(e.returnValues.role) === 2).map(e => e.returnValues.user);
         
         if (carriersList.length === 0) {
@@ -2553,13 +2572,7 @@ async function loadRoleHistory() {
         )
     );
 
-    const events = await logisticsEscrow.getPastEvents(
-        "allEvents",
-        {
-            fromBlock: deploymentBlock,
-            toBlock: "latest"
-        }
-    );
+    const events = await fetchEventsInBatches(logisticsEscrow, 'allEvents', undefined, deploymentBlock, 'latest');
 
     const filteredEvents = events
         .filter(event =>
@@ -3109,13 +3122,7 @@ async function loadSystemUsers() {
     const container = document.getElementById("adminUserList");
     
     try {
-        const events = await userRegistry.getPastEvents(
-            "UserRegistered",
-            {
-                fromBlock: deploymentBlock,
-                toBlock: "latest"
-            }
-        );
+        const events = await fetchEventsInBatches(userRegistry, 'UserRegistered', undefined, deploymentBlock, 'latest');
         
         adminAllUsers = events.map(e => e.returnValues);
         
@@ -3127,7 +3134,7 @@ async function loadSystemUsers() {
         console.error("Failed to load users:", e);
         container.innerHTML = `
             <div class="empty-box">
-                Failed to load users.
+                Failed to load users: ${e.message}
             </div>
         `;
     }
