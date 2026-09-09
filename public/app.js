@@ -608,10 +608,15 @@ async function loadAgreementList() {
 
     const fetchedAgreements = [];
 
+    const promises = [];
     for (let id = 1; id <= count; id++) {
-        const agreement = await logisticsEscrow.methods
-            .getAgreement(id)
-            .call();
+        promises.push(logisticsEscrow.methods.getAgreement(id).call());
+    }
+
+    const allAgreements = await Promise.all(promises);
+
+    for (let i = 0; i < allAgreements.length; i++) {
+        const agreement = allAgreements[i];
 
         let belongs = false;
 
@@ -1160,6 +1165,19 @@ async function createAgreement() {
             return;
         }
 
+        // Pre-flight check: ensure carrier is registered and is actually a Carrier
+        const isReg = await userRegistry.methods.isRegistered(carrier).call();
+        if (!isReg) {
+            showToast("The entered wallet address is not registered in the system.", "warning");
+            return;
+        }
+
+        const role = await userRegistry.methods.getUserRole(carrier).call();
+        if (Number(role) !== 2) {
+            showToast("The entered wallet address is not registered as a Carrier.", "warning");
+            return;
+        }
+
         if (
             Number(total) <= 0 ||
             Number(pickup) <= 0 ||
@@ -1699,28 +1717,32 @@ async function loadAgreementSharedFiles(agreementId) {
     let totalFound = 0;
     let sectionsHtml = "";
 
-    for (const ctx of contexts) {
-        try {
-            const res  = await fetch(`/api/files/${agreementId}/${ctx.key}`);
-            const data = await res.json();
-            const files = data.files || [];
-            totalFound += files.length;
+    const fetchPromises = contexts.map(ctx => 
+        fetch(`/api/files/${agreementId}/${ctx.key}`)
+            .then(res => res.json())
+            .then(data => ({ ctx, files: data.files || [] }))
+            .catch(e => {
+                console.warn(`Could not load ${ctx.key} files`, e);
+                return { ctx, files: [] };
+            })
+    );
 
-            if (files.length === 0) continue;
+    const results = await Promise.all(fetchPromises);
 
-            sectionsHtml += `
-                <div class="shared-file-section">
-                    <div class="shared-file-section-title">
-                        <span>${ctx.icon}</span>
-                        <strong>${ctx.label}</strong>
-                        <span class="file-count-badge">${files.length}</span>
-                    </div>
-                    <div class="file-list shared-file-list" id="shared-files-${ctx.key}"></div>
+    for (const { ctx, files } of results) {
+        totalFound += files.length;
+        if (files.length === 0) continue;
+
+        sectionsHtml += `
+            <div class="shared-file-section">
+                <div class="shared-file-section-title">
+                    <span>${ctx.icon}</span>
+                    <strong>${ctx.label}</strong>
+                    <span class="file-count-badge">${files.length}</span>
                 </div>
-            `;
-        } catch (e) {
-            console.warn(`Could not load ${ctx.key} files`, e);
-        }
+                <div class="file-list shared-file-list" id="shared-files-${ctx.key}"></div>
+            </div>
+        `;
     }
 
     if (totalFound === 0) {
@@ -1730,17 +1752,12 @@ async function loadAgreementSharedFiles(agreementId) {
 
     container.innerHTML = sectionsHtml;
 
-    // Now populate each section
-    for (const ctx of contexts) {
+    // Now populate each section directly using the already fetched results!
+    for (const { ctx, files } of results) {
+        if (files.length === 0) continue;
         const el = document.getElementById(`shared-files-${ctx.key}`);
         if (!el) continue;
-        try {
-            const res  = await fetch(`/api/files/${agreementId}/${ctx.key}`);
-            const data = await res.json();
-            renderServerFiles(el, data.files || [], false);
-        } catch (e) {
-            el.innerHTML = `<div class="file-empty-state">Error loading files.</div>`;
-        }
+        renderServerFiles(el, files, false);
     }
 
     // Update badge
@@ -1752,9 +1769,90 @@ async function loadAgreementSharedFiles(agreementId) {
 
 // ==================== AGREEMENT DETAIL ====================
 
+function resetAgreementDetailUI() {
+    const fields = [
+        "detailPageId", "detailPageShipper", "detailPageCarrier", 
+        "detailPageTotal", "detailPageEscrow", "detailPageTotalUsd", "detailPageEscrowUsd",
+        "detailPageDeadline", "detailPageCreated", 
+        "detailPagePickupAmount", "detailPageDeliveryAmount", "detailPagePickupAmountUsd", "detailPageDeliveryAmountUsd",
+        "detailPageRejectionReason"
+    ];
+    fields.forEach(f => {
+        const el = document.getElementById(f);
+        if (el) el.textContent = "...";
+    });
+
+    const statusBadge = document.getElementById("detailPageStatus");
+    if (statusBadge) { statusBadge.textContent = "..."; statusBadge.className = "status-badge"; }
+
+    const pStatus = document.getElementById("detailPagePickupStatus");
+    if (pStatus) { pStatus.textContent = "..."; pStatus.className = "milestone-status"; }
+
+    const dStatus = document.getElementById("detailPageDeliveryStatus");
+    if (dStatus) { dStatus.textContent = "..."; dStatus.className = "milestone-status"; }
+
+    const rejectBox = document.getElementById("detailRejectionReasonBox");
+    if (rejectBox) rejectBox.style.display = "none";
+
+    const detailActionTitle = document.getElementById("detailActionTitle");
+    if (detailActionTitle) detailActionTitle.textContent = "No Action Required";
+
+    const detailActionDescription = document.getElementById("detailActionDescription");
+    if (detailActionDescription) detailActionDescription.textContent = "Loading available action...";
+
+    const detailActionContent = document.getElementById("detailActionContent");
+    if (detailActionContent) detailActionContent.innerHTML = "<div class='file-loading'>Loading actions...</div>";
+    
+    const sharedFiles = document.getElementById("detailSharedFiles");
+    if (sharedFiles) sharedFiles.innerHTML = "<div class='file-loading'>Loading documents...</div>";
+    
+    const sharedFilesBadge = document.getElementById("detailSharedFilesBadge");
+    if (sharedFilesBadge) sharedFilesBadge.textContent = "0";
+}
+
+function populateAgreementDetailUI(agreement) {
+    document.getElementById("detailPageId").textContent = agreement.id;
+    document.getElementById("detailPageShipper").textContent = agreement.shipper;
+    document.getElementById("detailPageCarrier").textContent = agreement.carrier;
+
+    const tVal = web3.utils.fromWei(agreement.totalAmount.toString(), "ether");
+    document.getElementById("detailPageTotal").textContent = `${tVal} ETH`;
+    if (typeof ethUsdPrice !== 'undefined' && ethUsdPrice > 0) document.getElementById("detailPageTotalUsd").textContent = `~${(Number(tVal) * ethUsdPrice).toFixed(2)} USD`;
+
+    const eVal = web3.utils.fromWei(agreement.escrowBalance.toString(), "ether");
+    document.getElementById("detailPageEscrow").textContent = `${eVal} ETH`;
+    if (typeof ethUsdPrice !== 'undefined' && ethUsdPrice > 0) document.getElementById("detailPageEscrowUsd").textContent = `~${(Number(eVal) * ethUsdPrice).toFixed(2)} USD`;
+
+    document.getElementById("detailPageDeadline").textContent = formatTimestamp(agreement.deadline);
+    document.getElementById("detailPageCreated").textContent = formatTimestamp(agreement.createdAt);
+
+    const pVal = web3.utils.fromWei(agreement.pickupAmount.toString(), "ether");
+    document.getElementById("detailPagePickupAmount").textContent = `${pVal} ETH`;
+    if (typeof ethUsdPrice !== 'undefined' && ethUsdPrice > 0) document.getElementById("detailPagePickupAmountUsd").textContent = `~${(Number(pVal) * ethUsdPrice).toFixed(2)} USD`;
+
+    const dVal = web3.utils.fromWei(agreement.deliveryAmount.toString(), "ether");
+    document.getElementById("detailPageDeliveryAmount").textContent = `${dVal} ETH`;
+    if (typeof ethUsdPrice !== 'undefined' && ethUsdPrice > 0) document.getElementById("detailPageDeliveryAmountUsd").textContent = `~${(Number(dVal) * ethUsdPrice).toFixed(2)} USD`;
+    
+    setMilestoneStatusElement("detailPagePickupStatus", agreement.pickupStatus, agreement.status);
+    setMilestoneStatusElement("detailPageDeliveryStatus", agreement.deliveryStatus, agreement.status);
+    
+    const statusBadge = document.getElementById("detailPageStatus");
+    statusBadge.textContent = getAgreementStatusName(agreement);
+    statusBadge.className = `status-badge ${getAgreementStatusClass(agreement)}`;
+}
+
 async function openAgreementDetail(id) {
     selectedAgreementId = Number(id);
-    await loadAgreementDetail(selectedAgreementId, true);
+    resetAgreementDetailUI();
+    showPage("agreement-detail");
+    
+    const cached = window.currentRoleAgreements ? window.currentRoleAgreements.find(a => Number(a.id) === Number(id)) : null;
+    if (cached) {
+        populateAgreementDetailUI(cached);
+    }
+    
+    loadAgreementDetail(selectedAgreementId, false).catch(console.error);
 }
 
 window.openAgreementDetail = openAgreementDetail;
