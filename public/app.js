@@ -1840,6 +1840,9 @@ function populateAgreementDetailUI(agreement) {
     const statusBadge = document.getElementById("detailPageStatus");
     statusBadge.textContent = getAgreementStatusName(agreement);
     statusBadge.className = `status-badge ${getAgreementStatusClass(agreement)}`;
+
+    // Render actions instantly using cached data
+    renderAgreementAction(agreement);
 }
 
 async function openAgreementDetail(id) {
@@ -1901,11 +1904,17 @@ async function loadAgreementDetail(id, navigate = true) {
         agreement.status
     );
 
-        setMilestoneStatusElement(
+    setMilestoneStatusElement(
         "detailPageDeliveryStatus",
         agreement.deliveryStatus,
         agreement.status
     );
+
+    const statusBadge = document.getElementById("detailPageStatus");
+    statusBadge.textContent = getAgreementStatusName(agreement);
+    statusBadge.className = `status-badge ${getAgreementStatusClass(agreement)}`;
+
+    renderAgreementAction(agreement);
 
     const rejectBox = document.getElementById("detailRejectionReasonBox");
     if (rejectBox) rejectBox.style.display = "none";
@@ -1929,17 +1938,6 @@ async function loadAgreementDetail(id, navigate = true) {
             console.error("Failed to load rejection reason", e);
         }
     }
-
-
-    const statusBadge = document.getElementById("detailPageStatus");
-
-    statusBadge.textContent =
-        getAgreementStatusName(agreement);
-
-    statusBadge.className =
-        `status-badge ${getAgreementStatusClass(agreement)}`;
-
-    renderAgreementAction(agreement);
 
     // Load shared file viewer for both parties
     loadAgreementSharedFiles(Number(id));
@@ -2005,8 +2003,8 @@ function renderAgreementAction(agreement) {
             deadlinePassed &&
             !escrow.isZero() &&
             status !== 3 &&
-                status !== 4 &&
-                status !== 5
+            status !== 4 &&
+            status !== 5
         ) {
             title.textContent =
                 "Agreement Deadline Passed";
