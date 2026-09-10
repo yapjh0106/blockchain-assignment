@@ -654,7 +654,7 @@ function renderAgreementList() {
         currentRole === 1 ? "Carrier" : "Shipper";
 
     let title = "Agreements";
-    if (currentRole === 1) title = "My Logistics Agreements";
+    if (currentRole === 1) title = "My LogiChain Agreements";
     if (currentRole === 2) title = "Assigned Agreements";
     if (currentRole === 3) title = "System Agreements";
 

@@ -26,12 +26,12 @@ contract UserRegistry {
         admin = msg.sender;
         registeredUsers[msg.sender] = true;
         userRoles[msg.sender] = Role.Admin;
-        userNames[msg.sender] = "Super Admin";
+        userNames[msg.sender] = "Admin";
 
         emit UserRegistered(
             msg.sender,
             Role.Admin,
-            "Super Admin",
+            "Admin",
             block.timestamp
         );
     }

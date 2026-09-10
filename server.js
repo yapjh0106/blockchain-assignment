@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const multer = require("multer");
@@ -7,9 +8,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ==================== SUPABASE CONFIGURATION ====================
-// In production, these should be securely stored in process.env
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://yvcxxrkzlcdklzxetiin.supabase.co";
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2Y3h4cmt6bGNka2x6eGV0aWluIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODQ5MDc2MiwiZXhwIjoyMTA0MDY2NzYyfQ.4U3A3Vaidm4RJen8uu43R3_UaI6BTxCqdZlh17arpPA";
+// These are securely loaded from your .env file
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 const BUCKET_NAME = "agreements";
@@ -199,5 +200,5 @@ function getMime(filename) {
 
 // ==================== START ====================
 app.listen(PORT, () => {
-    console.log(`Logistics Escrow dApp running at http://localhost:${PORT}`);
+    console.log(`LogiChain running at http://localhost:${PORT}`);
 });

@@ -1,6 +1,8 @@
-# Decentralized Logistics Escrow DApp
+# LogiChain
 
-A blockchain-based decentralized application (DApp) that facilitates trustless, milestone-based payments between Shippers and Carriers using Ethereum smart contracts. This platform utilizes a smart contract architecture containing a User Registry, a Carrier Reputation Token (CRP), and a Logistics Escrow system to manage end-to-end logistics operations transparently.
+🌍 **Live Demo:** [https://blockchain-assignment-l3x7.onrender.com/](https://blockchain-assignment-l3x7.onrender.com/)
+
+A blockchain-based decentralized application (DApp) that facilitates trustless, milestone-based payments between Shippers and Carriers using Ethereum smart contracts. This platform utilizes a smart contract architecture containing a User Registry, a Carrier Reputation Token (CRP), and a LogiChain system to manage end-to-end logistics operations transparently.
 
 ## Table of Contents
 - [Features](#features)
@@ -38,7 +40,18 @@ Before you begin, ensure you have the following installed on your machine:
    ```bash
    npm install
    ```
-   *(Note: This project relies on standard web3 dependencies and OpenZeppelin contracts).*
+
+3. **Configure Environment Variables**
+   Create a `.env` file in the root directory and add the following keys. These are required for smart contract deployment to Sepolia and backend file storage (Supabase):
+   ```env
+   # Supabase (for backend document storage)
+   SUPABASE_URL="https://your-supabase-url.supabase.co"
+   SUPABASE_SERVICE_KEY="your-supabase-service-role-key"
+
+   # Ethereum Network Deployment (for truffle migrate to Sepolia)
+   MNEMONIC="your twelve word mnemonic phrase goes here"
+   INFURA_API_KEY="your-infura-api-key"
+   ```
 
 ## Smart Contract Deployment
 
@@ -52,33 +65,26 @@ This project contains three core contracts: `UserRegistry.sol`, `CarrierReputati
    ```
 
 ### Testnet Deployment (Sepolia)
-1. Ensure your `.env` or configuration file contains a valid Infura/Alchemy RPC URL and your deployer account mnemonic.
-2. Ensure the `network_id` in `truffle-config.js` for Sepolia is set correctly (or use `"*"` to bypass strict checking).
-3. Deploy to Sepolia:
+1. Ensure your `.env` configuration file contains a valid Infura API Key and your deployer account mnemonic.
+2. Deploy to Sepolia:
    ```bash
    truffle migrate --network sepolia
    ```
 
-## Running the Frontend
+## Running the Application
 
-The frontend is built with vanilla HTML, CSS, and JavaScript and relies on `web3.js` for blockchain interaction. You need a local development server to run it properly (opening the HTML file directly in the browser may cause CORS issues with MetaMask and APIs).
+The application is served by an Express backend (`server.js`) that handles both static frontend files and Supabase file uploads via an API.
 
-1. **Install a Local Web Server (if you don't have one):**
+1. **Start the Server:**
+   Run the Node.js server from the project root:
    ```bash
-   npm install -g http-server
+   node server.js
    ```
 
-2. **Serve the Application:**
-   Navigate into the `public/` directory and start the server:
-   ```bash
-   cd public
-   http-server -p 8080
-   ```
-
-3. **Access the DApp:**
+2. **Access the DApp:**
    Open your browser and navigate to:
    ```text
-   http://localhost:8080
+   http://localhost:3000
    ```
 
 ## MetaMask Setup
