@@ -127,7 +127,15 @@ function createDashboardStatus(agreement) {
     `;
 }
 
-function getMilestoneStatusName(status) {
+function getMilestoneStatusName(status, agreement = null) {
+    if (agreement && Number(status) !== 2) {
+        const deadlinePassed = Math.floor(Date.now() / 1000) > Number(agreement.deadline);
+        const agrStatus = Number(agreement.status);
+        if (agrStatus === 4) return "Refunded";
+        if (agrStatus === 5) return "Cancelled";
+        if (agrStatus === 3 || deadlinePassed) return "Expired";
+    }
+
     const statuses = {
         0: "Pending",
         1: "Submitted",
@@ -997,12 +1005,13 @@ function renderCarrierAssignedAgreements() {
 
     body.innerHTML = recent.map(agreement => {
         let milestone =
-            `Pickup: ${getMilestoneStatusName(agreement.pickupStatus)}`;
+            `Pickup: ${getMilestoneStatusName(agreement.pickupStatus, agreement)}`;
 
         if (Number(agreement.pickupStatus) === 2) {
             milestone =
                 `Delivery: ${getMilestoneStatusName(
-                    agreement.deliveryStatus
+                    agreement.deliveryStatus,
+                    agreement
                 )}`;
         }
 
@@ -1381,6 +1390,21 @@ class FileAttachmentManager {
         this._render();
     }
 
+    setReadonly(isReadonly) {
+        this.isReadonly = isReadonly;
+        if (this.fileInput) this.fileInput.disabled = isReadonly;
+        if (this.dropZone) {
+            if (isReadonly) {
+                this.dropZone.style.opacity = "0.5";
+                this.dropZone.style.pointerEvents = "none";
+            } else {
+                this.dropZone.style.opacity = "1";
+                this.dropZone.style.pointerEvents = "auto";
+            }
+        }
+        this._render();
+    }
+
     clear() {
         this._agreementId  = null;
         this.pendingFiles   = [];
@@ -1520,7 +1544,8 @@ class FileAttachmentManager {
                 p => !(p.name === f.name && p.size === f.size)
             );
         });
-        return data.files || [];
+        await this._fetchServerFiles();
+        return [];
     }
 
     async _deleteServerFile(file) {
@@ -1581,9 +1606,11 @@ class FileAttachmentManager {
                                 <span class="file-status-chip uploaded">✓ Saved</span>
                             </span>
                         </div>
+                        ${!this.isReadonly ? `
                         <button class="file-item-remove server-delete"
                                 type="button" title="Delete"
                                 data-server-idx="${idx}">✕</button>
+                        ` : ""}
                     </div>
                 `;
             }).join("");
@@ -1608,9 +1635,11 @@ class FileAttachmentManager {
                                 ${chip}
                             </span>
                         </div>
+                        ${!this.isReadonly ? `
                         <button class="file-item-remove pending-remove"
                                 type="button" title="Remove"
                                 data-pending-id="${entry.id}">✕</button>
+                        ` : ""}
                     </div>
                 `;
             }).join("");
@@ -1834,8 +1863,8 @@ function populateAgreementDetailUI(agreement) {
     document.getElementById("detailPageDeliveryAmount").textContent = `${dVal} ETH`;
     if (typeof ethUsdPrice !== 'undefined' && ethUsdPrice > 0) document.getElementById("detailPageDeliveryAmountUsd").textContent = `~${(Number(dVal) * ethUsdPrice).toFixed(2)} USD`;
     
-    setMilestoneStatusElement("detailPagePickupStatus", agreement.pickupStatus, agreement.status);
-    setMilestoneStatusElement("detailPageDeliveryStatus", agreement.deliveryStatus, agreement.status);
+    setMilestoneStatusElement("detailPagePickupStatus", agreement.pickupStatus, agreement);
+    setMilestoneStatusElement("detailPageDeliveryStatus", agreement.deliveryStatus, agreement);
     
     const statusBadge = document.getElementById("detailPageStatus");
     statusBadge.textContent = getAgreementStatusName(agreement);
@@ -1901,13 +1930,13 @@ async function loadAgreementDetail(id, navigate = true) {
     setMilestoneStatusElement(
         "detailPagePickupStatus",
         agreement.pickupStatus,
-        agreement.status
+        agreement
     );
 
     setMilestoneStatusElement(
         "detailPageDeliveryStatus",
         agreement.deliveryStatus,
-        agreement.status
+        agreement
     );
 
     const statusBadge = document.getElementById("detailPageStatus");
@@ -1947,26 +1976,20 @@ async function loadAgreementDetail(id, navigate = true) {
     }
 }
 
-function setMilestoneStatusElement(elementId, status, agreementStatus) {
+function setMilestoneStatusElement(elementId, status, agreement) {
     const element = document.getElementById(elementId);
     const value = Number(status);
-    const agStatus = Number(agreementStatus);
 
-    if (agStatus === 5 && value !== 2) {
-        element.textContent = "Cancelled";
-        element.className = "milestone-status cancelled";
-        element.style.color = ""; // reset inline color
-        return;
-    }
-    
     element.style.color = "";
 
-    element.textContent =
-        getMilestoneStatusName(value);
+    const statusName = getMilestoneStatusName(value, agreement);
+    element.textContent = statusName;
 
     element.className = "milestone-status";
 
-    if (value === 0) {
+    if (statusName === "Cancelled" || statusName === "Expired" || statusName === "Refunded") {
+        element.className = "milestone-status cancelled";
+    } else if (value === 0) {
         element.classList.add("pending");
     } else if (value === 1) {
         element.classList.add("submitted");
@@ -2464,10 +2487,10 @@ async function openSubmitPage() {
         )} ETH`;
 
     document.getElementById("submitPagePickupStatus").textContent =
-        getMilestoneStatusName(agreement.pickupStatus);
+        getMilestoneStatusName(agreement.pickupStatus, agreement);
 
     document.getElementById("submitPageDeliveryStatus").textContent =
-        getMilestoneStatusName(agreement.deliveryStatus);
+        getMilestoneStatusName(agreement.deliveryStatus, agreement);
 
     const pickupButton =
         document.getElementById("submitPickupButton");
@@ -2507,6 +2530,8 @@ async function openSubmitPage() {
         fileManagers.pickup?.loadForAgreement(selectedAgreementId),
         fileManagers.delivery?.loadForAgreement(selectedAgreementId)
     ]);
+    fileManagers.pickup?.setReadonly(pickupButton.disabled);
+    fileManagers.delivery?.setReadonly(deliveryButton.disabled);
 }
 window.openSubmitPage = openSubmitPage;
 
