@@ -2655,7 +2655,7 @@ async function viewReputation() {
 
             html += `
                 <tr>
-                    <td class="primary-cell">${shortAddress(carrier)}</td>
+                    <td class="primary-cell" style="word-break: break-all;">${carrier}</td>
                     <td style="color: var(--blue); font-weight: 600;">${balance} CRP</td>
                     <td>${verified}</td>
                     <td>${completed}</td>
