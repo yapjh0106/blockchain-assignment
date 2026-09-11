@@ -55,6 +55,9 @@ Before you begin, ensure you have the following installed on your machine:
 
 ## Smart Contract Deployment
 
+> [!NOTE]
+> If you are using the cloned GitHub repository, you can skip this step and proceed directly to [Running the Application](#running-the-application).
+
 This project contains three core contracts: `UserRegistry.sol`, `CarrierReputationToken.sol`, and `LogisticsEscrow.sol`.
 
 ### Local Deployment (Ganache)
